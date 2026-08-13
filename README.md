@@ -99,9 +99,78 @@ node scripts/verify.mjs --skip-lint    # 跳过 lint
 - `.env.local` 已加入 `.gitignore`，本地真实 Key 放这里。
 - `.env.example` 仅含变量名 + 占位 Key（`sk-replace-with-your-real-key`）。
 - 演示模式（`DEMO_MODE=1` / `LLM_MOCK=1`）下不会发起任何外部网络请求。
+- **部署时 Key 只走 Vercel 控制台**：不进仓库、不进 bundle、不进对话历史。详见下方「部署到 Vercel」章节。
 
 > 强烈建议：交付作业前为该项目**签发一次性 / 受限额度**的子 Key；或在交付完成后**轮换 Key**。
 
+## 🌐 部署到 Vercel
+
+本项目零配置即可部署到 Vercel。`vercel.json` 已声明 framework / buildCommand / regions。
+
+### 方式一：GitHub 集成（推荐长期维护）
+
+1. 把代码推到 GitHub 仓库（建议私有）
+2. 登录 [vercel.com](https://vercel.com) → Add New Project → 选仓库
+3. Framework Preset 自动识别为 Next.js
+4. Settings → Environment Variables 添加下方 5 个变量（仅 Production）
+5. 点 Deploy，约 90 秒构建完成 → 得到 `https://<project>.vercel.app`
+
+### 方式二：vercel CLI（一次性快速）
+
+```bash
+npm i -g vercel               # PowerShell 需先 Set-ExecutionPolicy RemoteSigned
+cd ai-pet-food-purchasing-tool
+vercel login                  # 弹浏览器授权
+vercel link                   # 首次会让你输入 project name
+
+# 交互式添加环境变量（粘贴轮换后的 Key，不会进 git）
+vercel env add LLM_API_KEY production
+vercel env add LLM_BASE_URL production
+vercel env add LLM_MODEL production
+vercel env add DEMO_MODE production
+vercel env add LLM_MOCK production
+
+vercel --prod                 # 一键部署到 Production
+```
+
+### 环境变量清单（Production）
+
+| 变量 | 值 | 说明 |
+|---|---|---|
+| `DEMO_MODE` | `0` | 关闭演示模式 |
+| `LLM_MOCK` | `0` | 关闭 mock LLM |
+| `LLM_BASE_URL` | `https://api.minimax.chat/v1` | MiniMax OpenAI 兼容 endpoint |
+| `LLM_API_KEY` | `<轮换后的新 Key>` | 在 Vercel 控制台直接填入，**不经对话** |
+| `LLM_MODEL` | `MiniMax-M3` | 模型名 |
+
+> Preview / Development 环境建议留 `DEMO_MODE=1` 默认，避免预览构建消耗真实 Key 额度。
+
+### 部署后验收
+
+- 浏览器访问 `/`、`/recommend`、`/compare` 三页均能渲染，无 console error
+- `/recommend` 选「狗」→ 推荐结果全部是狗粮（验证物种预过滤）
+- `/recommend` 提交后，Vercel Function logs 显示 `source: "llm"`（不是 mock / rule）
+- `/compare` 多选 → 出现 LLM 给的 ≤120 字 verdict
+- 冷启动首访 1–3 秒属正常
+
+### 回滚 / 域名
+
+- 任意历史部署可在 Vercel 控制台 → Deployments → Promote 一键回滚
+- 子域名可在 Settings → Domains 修改（如 `pet-food-demo.vercel.app`）
+- 绑定自定义域名同样在该页面操作
+
+### 本地先跑通（推荐）
+
+部署前务必在本地跑一遍 `pnpm run verify`，确保零错误后再推。
+```bash
+pnpm install
+pnpm run verify         # 期望：✅ 可交付
+pnpm build              # 确保生产构建无错
+```
+
+更详细的故障排查见 [`docs/deployment.md`](./docs/deployment.md)。
+
+---
 ## 📦 数据获取架构（三层回退）
 
 商品数据按以下顺序回退（详见 `src/lib/scraper.ts`）：

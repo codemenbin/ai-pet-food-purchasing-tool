@@ -143,6 +143,33 @@ if (candidates.length === 0) {
 - `tests/unit/llm.mock.test.ts` 新增“宠物信息块”检测测试
 
 **效果**：物种过滤从“LLM 自律”变成“代码契约”，再无跨物种推荐；mock 误判率从 ~5% 降到 0%。
+### 3.5 调优点 5：部署安全——Key 不入仓、不入 bundle、走平台环境变量
+
+**背景**：用户要把应用部署上线给面试官访问，需要把真实 API Key 接入生产环境。之前的 `.env` 里虽然 gitignore 了，但工作树里仍存有真实 Key，且 Key 在本次对话历史里明文出现过一次。
+
+**风险点**：
+- `.env` 提交进 bundle → Key 进 Vercel 函数包，被平台扫描 / 出现在函数日志
+- `.env` 被 `cat` / `echo` 进 shell 历史 → 终端会话可恢复
+- 通过对话 / 截图传输 Key → 进入 LLM 训练数据 / 第三方服务日志
+
+**调优后**（四道防线）：
+
+1. **`.gitignore` 排除 `.env` / `.env.local`**——已有，仓库无 Key 历史
+2. **`.vercelignore` 排除 `.env` 及其变体**——新增，部署 bundle 也不会包含
+3. **`.env` 中 Key 改为占位符 `sk-replace-with-your-real-key`**——新增，本地工作树也安全
+4. **Vercel 控制台 Environment Variables 填 Key**——用户在浏览器粘贴，不进对话 / 不进 git
+
+**配套动作**：
+- `vercel.json` 锁定 `installCommand: pnpm install --frozen-lockfile`，避免 CI 重装时未锁版本
+- `regions: ["sin1"]` 选新加坡节点，国内面试官延迟最低
+- README「部署到 Vercel」章节明列 5 个环境变量 + 两路部署命令 + 验收清单
+- Preview / Development 环境留 `DEMO_MODE=1` 默认值，预览构建不消耗真实 Key 额度
+
+**测试覆盖**：
+- `scripts/verify.mjs` Step 6b：grep 仓库源码 / 测试 / 文档，无任何 `sk-[a-zA-Z0-9_-]{16,}` 残留
+- `.vercelignore` 内容覆盖 `.env`、`.next/`、`tests/`、`docs/`、`scripts/`、`*.tsbuildinfo`
+
+**效果**：Key 流转链路从「对话 / 截图 / 终端历史」压缩到「Vercel 控制台 HTTPS POST」单点，配合轮换建议与 `.env.local` 本地隔离，多层冗余。即使其中一层失效，Key 也不会进仓库历史 / bundle / 对话记录。
 
 ---
 
