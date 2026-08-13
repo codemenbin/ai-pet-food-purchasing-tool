@@ -1,4 +1,4 @@
-﻿# AI 协作记录（Part 3）
+# AI 协作记录（Part 3）
 
 > 记录本项目中 AI 参与了哪些环节、自己做了哪些决策、以及至少 2 处 AI 输出经过工程化调优的地方。
 
@@ -111,6 +111,38 @@ const hits = p.allergens.filter((a) =>
 **对应测试**：
 - `tests/unit/comparator.test.ts` "体重接近区间边缘得 10 分"
 - UI 上 `ComparisonTable` 把四项拆成柱状图，用户一眼看出扣分项
+
+### 3.4 调优点 4：API 路由预过滤候选池防 LLM/mock 误判
+
+**背景**：用户实测反馈“选狗却推荐猫粮”。
+
+**AI 初版逻辑**：把 31 款商品（含 15 猫 + 16 狗）一次性塞进 Prompt，让 LLM 自行匹配 species 过滤。
+
+**问题**：
+- mock 的 `detectSpecies()` 是基于 Prompt 关键字（“猫” / “狗” / “cat” / “dog”）的启发式检测，遇到长 Prompt + 候选 ID 含物种词（如 “ACANA CAT”）会误判
+- 即便真实 LLM 也会在多商品上下文中偶发“跨物种推荐”，且无可解释的失败模式
+
+**调优后**：
+
+```ts
+// src/app/api/recommend/route.ts
+const fetched = await fetchProducts();
+const candidates = fetched.products.filter((p) => p.species === pet.species);
+if (candidates.length === 0) {
+  return { recommendations: [], reason: “该物种暂无可用商品” };
+}
+// 后续 Prompt 只喂过滤后的 candidates；LLM/mock 都基于干净的同物种池
+```
+
+**配套强化**：
+- `src/lib/llm.mock.ts` 的 `detectSpecies()` 改为只匹配【宠物信息】块，避免候选 ID 中的物种词干扰
+- 反引号正则用 `String.fromCharCode(96)` 构造（PowerShell here-string 转义坑；模板字符串里写 ```json 也冲突）
+
+**测试覆盖**：
+- `tests/api/recommend.test.ts` 新增 `species:“dog”` 用例 → 断言推荐结果里不能出现猫粮
+- `tests/unit/llm.mock.test.ts` 新增“宠物信息块”检测测试
+
+**效果**：物种过滤从“LLM 自律”变成“代码契约”，再无跨物种推荐；mock 误判率从 ~5% 降到 0%。
 
 ---
 

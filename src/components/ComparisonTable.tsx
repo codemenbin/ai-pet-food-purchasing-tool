@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import type { CompareResponse, Product } from "@/types";
 import { isSignificantDeviation } from "@/lib/comparator";

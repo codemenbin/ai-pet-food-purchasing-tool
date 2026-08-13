@@ -1,4 +1,4 @@
-﻿import { test, expect } from "@playwright/test";
+import { test, expect } from "@playwright/test";
 
 test("配料对比：2 款商品", async ({ page }) => {
   await page.goto("/compare");

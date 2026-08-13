@@ -1,4 +1,4 @@
-﻿/**
+/**
  * POST /api/compare
  * body: { productIds: string[2-3], pet: PetInfo }
  * returns: CompareResponse
@@ -14,13 +14,14 @@ import {
   computeNutritionDiffs,
   scoreProducts,
 } from "@/lib/comparator";
-import productsData from "@/data/products.json";
-import type { CompareResponse, Product } from "@/types";
+import { fetchProducts } from "@/lib/scraper";
+import type { CompareResponse } from "@/types";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-const products = productsData as Product[];
+// 反引号常量：用 String.fromCharCode 构造
+const BT = String.fromCharCode(96);
 
 const BodySchema = z.object({
   productIds: z
@@ -48,6 +49,10 @@ export async function POST(req: Request): Promise<NextResponse> {
 
   const { productIds, pet } = parsed.data;
 
+  // 拉取商品池（live → cache → mock 三层回退）
+  const fetched = await fetchProducts();
+  const products = fetched.products;
+
   // 校验 productIds 存在
   const selectedProducts = products.filter((p) => productIds.includes(p.id));
   if (selectedProducts.length !== productIds.length) {
@@ -67,7 +72,7 @@ export async function POST(req: Request): Promise<NextResponse> {
   }
   if (!selectedProducts.some((p) => p.species === pet.species)) {
     return NextResponse.json(
-      { error: `商品物种(${[...species].join("/")}) 与宠物物种(${pet.species}) 不匹配` },
+      { error: "商品物种(" + [...species].join("/") + ") 与宠物物种(" + pet.species + ") 不匹配" },
       { status: 400 }
     );
   }
@@ -81,12 +86,15 @@ export async function POST(req: Request): Promise<NextResponse> {
   try {
     const prompt = buildComparePrompt(pet, selectedProducts, nutritionDiffs, scores);
     const raw = await callLLM(prompt);
-    const cleaned = raw.replace(/^```json\s*/i, "").replace(/```\s*$/, "").trim();
+    // 容忍 markdown code fence
+    const fenceOpen = new RegExp("^" + BT + BT + BT + "json\\s*", "i");
+    const fenceClose = new RegExp(BT + BT + BT + "\\s*$");
+    const cleaned = raw.replace(fenceOpen, "").replace(fenceClose, "").trim();
     const jsonStart = cleaned.indexOf("{");
     const jsonStr = jsonStart >= 0 ? cleaned.slice(jsonStart) : cleaned;
     const obj = JSON.parse(jsonStr);
     if (typeof obj.verdict === "string") llmPart = { verdict: obj.verdict };
-    if (Array.isArray(obj.ranking)) llmPart = { ...llmPart, ranking: obj.ranking.filter((id: unknown) => typeof id === "string") };
+    if (Array.isArray(obj.ranking)) llmPart = { ...llmPart, ranking: (obj.ranking as unknown[]).filter((id: unknown): id is string => typeof id === "string") };
   } catch {
     // 静默回退
   }

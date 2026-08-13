@@ -1,4 +1,4 @@
-﻿import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { ProductSchema, PetInfoSchema, CompareResponseSchema, RecommendResponseSchema } from "@/types";
@@ -15,7 +15,7 @@ describe("products.json 数据完整性", () => {
   it("所有商品通过 ProductSchema 校验", () => {
     for (const p of productsData) {
       const r = ProductSchema.safeParse(p);
-      expect(r.success, `商品 ${(p as { id?: string }).id} 校验失败`).toBe(true);
+      expect(r.success, "商品 " + (p as { id?: string }).id + " 校验失败").toBe(true);
     }
   });
 
@@ -53,8 +53,8 @@ describe("products.json 数据完整性", () => {
     for (const p of productsData) {
       const nutrition = (p as { nutrition: Record<string, number> }).nutrition;
       for (const [k, v] of Object.entries(nutrition)) {
-        expect(v, `${(p as { id: string }).id}.nutrition.${k}`).toBeGreaterThanOrEqual(0);
-        expect(v, `${(p as { id: string }).id}.nutrition.${k}`).toBeLessThanOrEqual(10000);
+        expect(v, (p as { id: string }).id + ".nutrition." + k).toBeGreaterThanOrEqual(0);
+        expect(v, (p as { id: string }).id + ".nutrition." + k).toBeLessThanOrEqual(10000);
       }
     }
   });
@@ -66,6 +66,7 @@ describe("PetInfoSchema", () => {
       species: "cat",
       breed: "Persian",
       ageStage: "adult",
+      ageMonths: 36,
       weightKg: 4,
       knownAllergens: ["chicken"],
       monthlyBudgetCNY: 400,
@@ -90,6 +91,33 @@ describe("PetInfoSchema", () => {
     });
     expect(r.success).toBe(true);
     if (r.success) expect(r.data.knownAllergens).toEqual([]);
+  });
+
+  it("ageMonths 可省略（默认 48）", () => {
+    const r = PetInfoSchema.safeParse({
+      species: "cat",
+      breed: "X",
+      ageStage: "adult",
+      weightKg: 4,
+      monthlyBudgetCNY: 400,
+      destinationCountry: "CN",
+    });
+    expect(r.success).toBe(true);
+    if (r.success) expect(r.data.ageMonths).toBe(48);
+  });
+
+  it("ageMonths 超出 [0, 360] 范围拒绝", () => {
+    const r1 = PetInfoSchema.safeParse({
+      species: "cat", breed: "X", ageStage: "adult", ageMonths: -1,
+      weightKg: 4, monthlyBudgetCNY: 400, destinationCountry: "CN"
+    });
+    expect(r1.success).toBe(false);
+
+    const r2 = PetInfoSchema.safeParse({
+      species: "cat", breed: "X", ageStage: "adult", ageMonths: 400,
+      weightKg: 4, monthlyBudgetCNY: 400, destinationCountry: "CN"
+    });
+    expect(r2.success).toBe(false);
   });
 });
 
@@ -136,3 +164,4 @@ describe("RecommendResponseSchema", () => {
     expect(r.success).toBe(true);
   });
 });
+

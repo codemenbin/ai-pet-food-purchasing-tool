@@ -1,4 +1,4 @@
-﻿# AI 选粮助手 · 宠物粮食跨境电商面试作业
+# AI 选粮助手 · 宠物粮食跨境电商面试作业
 
 > 本仓库作为面试作业交付物，包含 Part 1 案例文档、Part 2 可运行 Demo、Part 3 AI 协作记录与一键交付门禁。
 
@@ -6,8 +6,9 @@
 
 为宠物粮食跨境电商场景设计的 AI 工具：
 
-- **① 个性化选粮推荐**：输入宠物画像 → 推荐 3-5 款主粮（结构化 + LLM 摘要）
-- **② 配料表对比**：挑选 2-3 款商品 → 营养 / 添加剂 / 过敏原 / 适配度结构化对比
+- **① 个性化选粮推荐**：输入宠物画像（物种 / 品种 / **月龄** / 阶段 / 体重 / 过敏 / 预算 / 目的地）→ 推荐 3-5 款主粮
+- **② 配料表对比**：挑选 2-3 款商品 → 营养 / 添加剂 / 过敏原 / **适配度评分** 结构化对比
+- **三层数据回退**：live（爬虫占位）→ cache（本地快照）→ mock（31 款内置商品）
 - **演示模式**：默认 `DEMO_MODE=1`，**无需 API Key** 即可完整体验
 - **真实模式**：填入 `.env.local` 即切换为真实大模型（OpenAI 兼容协议）
 
@@ -101,16 +102,37 @@ node scripts/verify.mjs --skip-lint    # 跳过 lint
 
 > 强烈建议：交付作业前为该项目**签发一次性 / 受限额度**的子 Key；或在交付完成后**轮换 Key**。
 
-## 📦 内置商品库
+## 📦 数据获取架构（三层回退）
 
-`src/data/products.json` 含 10 款跨境常见宠物主粮，覆盖：
+商品数据按以下顺序回退（详见 `src/lib/scraper.ts`）：
+
+```
+fetchProducts()
+    │
+    ├── DEMO_MODE=1 ──► mock   （默认；零成本、确定性）
+    │
+    └── DEMO_MODE=0 ──► live  ──► 失败/空 ──► cache ──► 失败/空 ──► mock
+```
+
+| 层 | 实现 | 状态 |
+|---|---|---|
+| **live** | `scrapeLive()` 占位 | 当前返回空 + 错误；接入真实 API（京东国际 / Chewy 等）即可 |
+| **cache** | `data/products.cache.json` | 缓存文件；存在时使用，每次 live 成功后建议落盘 |
+| **mock** | `src/data/products.json` | **31 款**（15 猫 + 16 狗），永远可用 |
+
+返回结构含 `source: "live" | "cache" | "mock"` 与 `errors: string[]`，前端可透明展示。
+
+### 内置商品库
+
+`src/data/products.json` 含 **31 款**（15 猫 + 16 狗）跨境常见宠物主粮，覆盖：
 
 - 物种：猫 / 狗
 - 阶段：幼年 / 成年 / 老年 / 全阶段
+- 品牌：Acana / Orijen / Royal Canin / Hill's / Blue Buffalo / Wellness / Taste of the Wild / Ziwi / Purina Pro Plan / Pedigree / Nutro / Meow Mix / Fancy Feast / PureLuxe / 麦富迪
 - 过敏原：含鸡 / 含鱼 / 含谷物 等多类
-- 跨境可用性：≥2 款不支持（演示红黄绿提示）
+- 跨境可用性：4 款不支持（演示红黄绿提示）
 
-可通过直接编辑 `products.json` 扩展，无需改代码（schema 校验在 `tests/unit/schema.test.ts`）。
+可直接编辑 `products.json` 扩展，无需改代码（schema 校验在 `tests/unit/schema.test.ts`）。
 
 ## 📝 案例文档
 

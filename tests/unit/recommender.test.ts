@@ -1,4 +1,4 @@
-﻿import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import { recommendByRules } from "@/lib/recommender";
 import type { PetInfo, Product } from "@/types";
 
@@ -26,6 +26,7 @@ const mkPet = (over: Partial<PetInfo> = {}): PetInfo => ({
   species: over.species ?? "cat",
   breed: over.breed ?? "X",
   ageStage: over.ageStage ?? "adult",
+  ageMonths: over.ageMonths ?? 48,
   weightKg: over.weightKg ?? 4,
   knownAllergens: over.knownAllergens ?? [],
   monthlyBudgetCNY: over.monthlyBudgetCNY ?? 400,

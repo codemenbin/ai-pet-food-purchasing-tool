@@ -1,4 +1,4 @@
-﻿/**
+/**
  * LLM 客户端
  * - DEMO_MODE / LLM_MOCK 开启时短路到本地 mock
  * - 否则按 OpenAI 兼容协议调用真实模型

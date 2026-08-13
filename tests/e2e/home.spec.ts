@@ -1,4 +1,4 @@
-﻿import { test, expect } from "@playwright/test";
+import { test, expect } from "@playwright/test";
 
 test("首页加载与两个入口可见", async ({ page }) => {
   const errors: string[] = [];

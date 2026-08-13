@@ -1,4 +1,4 @@
-﻿import type { Product, Recommendation, RecommendResponse } from "@/types";
+import type { Product, Recommendation, RecommendResponse } from "@/types";
 import ProductCard from "./ProductCard";
 
 export default function RecommendationList({

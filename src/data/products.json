@@ -1,207 +1,1686 @@
-﻿[
+[
   {
     "id": "acana-cat-adult",
     "brand": "Acana",
-    "name": "Acana Heritage Free-Run Poultry 猫粮",
+    "name": "Acana Heritage Free-Run Poultry ??",
     "species": "cat",
     "lifeStage": "adult",
-    "packageSize": { "value": 4.5, "unit": "kg" },
+    "packageSize": {
+      "value": 4.5,
+      "unit": "kg"
+    },
     "pricePerUnit": 480,
     "crossBorderAvailable": true,
     "origin": "Canada",
-    "ingredients": ["新鲜鸡肉", "火鸡肉", "鸡肝", "豌豆蛋白", "扁豆", "鸡脂肪", "鱼油", "菊苣根"],
-    "nutrition": { "protein": 31, "fat": 17, "fiber": 6, "moisture": 12, "ash": 7, "calories": 3850 },
-    "additives": {
-      "vitamins": ["维生素E", "维生素C"],
-      "minerals": ["锌", "铜"],
-      "preservatives": ["混合生育酚（天然防腐）"]
+    "ingredients": [
+      "????",
+      "???",
+      "??",
+      "????",
+      "??",
+      "???",
+      "??",
+      "???"
+    ],
+    "nutrition": {
+      "protein": 31,
+      "fat": 17,
+      "fiber": 6,
+      "moisture": 12,
+      "ash": 7,
+      "calories": 3850
     },
-    "allergens": ["chicken", "poultry"],
-    "weightRange": { "min": 3, "max": 7, "unit": "kg" },
-    "notes": "高蛋白、低碳水；适合活跃成年猫"
+    "additives": {
+      "vitamins": [
+        "???E",
+        "???C"
+      ],
+      "minerals": [
+        "?",
+        "?"
+      ],
+      "preservatives": [
+        "???????????"
+      ]
+    },
+    "allergens": [
+      "chicken",
+      "poultry"
+    ],
+    "weightRange": {
+      "min": 3,
+      "max": 7,
+      "unit": "kg"
+    },
+    "notes": "???????????????"
   },
   {
     "id": "royal-canin-puppy",
     "brand": "Royal Canin",
-    "name": "Royal Canin 幼犬专用粮",
+    "name": "Royal Canin ?????",
     "species": "dog",
     "lifeStage": "puppy",
-    "packageSize": { "value": 4, "unit": "kg" },
+    "packageSize": {
+      "value": 4,
+      "unit": "kg"
+    },
     "pricePerUnit": 360,
     "crossBorderAvailable": false,
     "origin": "France",
-    "ingredients": ["脱水禽肉", "大米", "动物脂肪", "小麦", "甜菜粕", "鱼油", "酵母"],
-    "nutrition": { "protein": 29, "fat": 18, "fiber": 3.2, "moisture": 9.5, "ash": 6.5, "calories": 3950 },
-    "additives": {
-      "vitamins": ["维生素A", "维生素D3", "维生素E"],
-      "minerals": ["铁", "锌", "锰"],
-      "preservatives": ["BHA", "BHT"]
+    "ingredients": [
+      "????",
+      "??",
+      "????",
+      "??",
+      "???",
+      "??",
+      "??"
+    ],
+    "nutrition": {
+      "protein": 29,
+      "fat": 18,
+      "fiber": 3.2,
+      "moisture": 9.5,
+      "ash": 6.5,
+      "calories": 3950
     },
-    "allergens": ["chicken", "wheat", "gluten"],
-    "weightRange": { "min": 1, "max": 25, "unit": "kg" },
-    "notes": "部分国家禁用 BHA/BHT；跨境请注意成分合规"
+    "additives": {
+      "vitamins": [
+        "???A",
+        "???D3",
+        "???E"
+      ],
+      "minerals": [
+        "?",
+        "?",
+        "?"
+      ],
+      "preservatives": [
+        "BHA",
+        "BHT"
+      ]
+    },
+    "allergens": [
+      "chicken",
+      "wheat",
+      "gluten"
+    ],
+    "weightRange": {
+      "min": 1,
+      "max": 25,
+      "unit": "kg"
+    },
+    "notes": "?????? BHA/BHT"
   },
   {
     "id": "hills-science-diet-senior",
     "brand": "Hill's Science Diet",
-    "name": "Hill's Science Diet 老年犬 7+ 鸡肉配方",
+    "name": "Hill's Science Diet ??? 7+ ????",
     "species": "dog",
     "lifeStage": "senior",
-    "packageSize": { "value": 7, "unit": "kg" },
+    "packageSize": {
+      "value": 7,
+      "unit": "kg"
+    },
     "pricePerUnit": 420,
     "crossBorderAvailable": true,
     "origin": "USA",
-    "ingredients": ["鸡肉粉", "糙米", "大麦", "豌豆蛋白", "鸡脂肪", "亚麻籽", "鱼油"],
-    "nutrition": { "protein": 18, "fat": 11, "fiber": 5, "moisture": 9, "ash": 5.5, "calories": 3540 },
-    "additives": {
-      "vitamins": ["维生素E", "维生素C", "β-胡萝卜素"],
-      "minerals": ["钙", "磷", "钾"],
-      "preservatives": ["柠檬酸", "混合生育酚"]
+    "ingredients": [
+      "???",
+      "??",
+      "??",
+      "????",
+      "???",
+      "???",
+      "??"
+    ],
+    "nutrition": {
+      "protein": 18,
+      "fat": 11,
+      "fiber": 5,
+      "moisture": 9,
+      "ash": 5.5,
+      "calories": 3540
     },
-    "allergens": ["chicken"],
-    "weightRange": { "min": 5, "max": 35, "unit": "kg" },
-    "notes": "老年犬专属配方，关节保健"
+    "additives": {
+      "vitamins": [
+        "???E",
+        "???C",
+        "?-????"
+      ],
+      "minerals": [
+        "?",
+        "?",
+        "?"
+      ],
+      "preservatives": [
+        "???",
+        "?????"
+      ]
+    },
+    "allergens": [
+      "chicken"
+    ],
+    "weightRange": {
+      "min": 5,
+      "max": 35,
+      "unit": "kg"
+    },
+    "notes": "????????????"
   },
   {
     "id": "wellness-core-grain-free-cat",
     "brand": "Wellness Core",
-    "name": "Wellness Core 无谷物猫粮 鸭肉配方",
+    "name": "Wellness Core ????? ????",
     "species": "cat",
     "lifeStage": "all",
-    "packageSize": { "value": 5.4, "unit": "kg" },
+    "packageSize": {
+      "value": 5.4,
+      "unit": "kg"
+    },
     "pricePerUnit": 520,
     "crossBorderAvailable": true,
     "origin": "USA",
-    "ingredients": ["鸭肉", "鸭肉粉", "火鸡粉", "豌豆", "扁豆", "马铃薯", "亚麻籽", "蔓越莓"],
-    "nutrition": { "protein": 38, "fat": 16, "fiber": 5, "moisture": 10, "ash": 7.5, "calories": 3850 },
-    "additives": {
-      "vitamins": ["维生素E", "牛磺酸"],
-      "minerals": ["锌", "铜"],
-      "preservatives": ["混合生育酚"]
+    "ingredients": [
+      "??",
+      "???",
+      "???",
+      "??",
+      "??",
+      "???",
+      "???",
+      "???"
+    ],
+    "nutrition": {
+      "protein": 38,
+      "fat": 16,
+      "fiber": 5,
+      "moisture": 10,
+      "ash": 7.5,
+      "calories": 3850
     },
-    "allergens": ["duck", "poultry"],
-    "notes": "高蛋白、无谷物；适合过敏体质猫咪"
+    "additives": {
+      "vitamins": [
+        "???E",
+        "???"
+      ],
+      "minerals": [
+        "?",
+        "?"
+      ],
+      "preservatives": [
+        "?????"
+      ]
+    },
+    "allergens": [
+      "duck",
+      "poultry"
+    ],
+    "notes": "???????"
   },
   {
     "id": "orijen-puppy-dog",
     "brand": "Orijen",
-    "name": "Orijen Puppy 幼犬全价粮",
+    "name": "Orijen Puppy ?????",
     "species": "dog",
     "lifeStage": "puppy",
-    "packageSize": { "value": 5.9, "unit": "kg" },
+    "packageSize": {
+      "value": 5.9,
+      "unit": "kg"
+    },
     "pricePerUnit": 680,
     "crossBorderAvailable": true,
     "origin": "Canada",
-    "ingredients": ["新鲜鸡肉", "新鲜火鸡肉", "新鲜鸡蛋", "新鲜鱼肉", "鸡肝", "豌豆", "扁豆", "南瓜"],
-    "nutrition": { "protein": 38, "fat": 20, "fiber": 4, "moisture": 12, "ash": 8, "calories": 4080 },
-    "additives": {
-      "vitamins": ["维生素E", "维生素C"],
-      "minerals": ["锌", "铜", "锰"],
-      "preservatives": ["混合生育酚"]
+    "ingredients": [
+      "????",
+      "?????",
+      "????",
+      "????",
+      "??",
+      "??",
+      "??",
+      "??"
+    ],
+    "nutrition": {
+      "protein": 38,
+      "fat": 20,
+      "fiber": 4,
+      "moisture": 12,
+      "ash": 8,
+      "calories": 4080
     },
-    "allergens": ["chicken", "poultry", "fish", "egg"],
-    "weightRange": { "min": 2, "max": 30, "unit": "kg" },
-    "notes": "高端生物适宜性配方，蛋白含量最高"
+    "additives": {
+      "vitamins": [
+        "???E",
+        "???C"
+      ],
+      "minerals": [
+        "?",
+        "?",
+        "?"
+      ],
+      "preservatives": [
+        "?????"
+      ]
+    },
+    "allergens": [
+      "chicken",
+      "poultry",
+      "fish",
+      "egg"
+    ],
+    "weightRange": {
+      "min": 2,
+      "max": 30,
+      "unit": "kg"
+    },
+    "notes": "?????????"
   },
   {
     "id": "taste-of-the-wild-salmon",
     "brand": "Taste of the Wild",
-    "name": "Taste of the Wild 三文鱼配方 成犬",
+    "name": "Taste of the Wild ????? ??",
     "species": "dog",
     "lifeStage": "adult",
-    "packageSize": { "value": 5.9, "unit": "kg" },
+    "packageSize": {
+      "value": 5.9,
+      "unit": "kg"
+    },
     "pricePerUnit": 420,
     "crossBorderAvailable": true,
     "origin": "USA",
-    "ingredients": ["三文鱼", "三文鱼粉", "甜薯", "马铃薯", "豌豆", "芥花籽油", "蓝莓", "覆盆子"],
-    "nutrition": { "protein": 32, "fat": 16, "fiber": 4, "moisture": 10, "ash": 7, "calories": 3900 },
-    "additives": {
-      "vitamins": ["维生素E", "维生素C"],
-      "minerals": ["锌", "硒"],
-      "preservatives": ["混合生育酚"]
+    "ingredients": [
+      "???",
+      "????",
+      "??",
+      "???",
+      "??",
+      "????",
+      "??",
+      "???"
+    ],
+    "nutrition": {
+      "protein": 32,
+      "fat": 16,
+      "fiber": 4,
+      "moisture": 10,
+      "ash": 7,
+      "calories": 3900
     },
-    "allergens": ["fish", "salmon"],
-    "weightRange": { "min": 8, "max": 50, "unit": "kg" },
-    "notes": "鱼配方，适合对禽肉过敏的犬"
+    "additives": {
+      "vitamins": [
+        "???E",
+        "???C"
+      ],
+      "minerals": [
+        "?",
+        "?"
+      ],
+      "preservatives": [
+        "?????"
+      ]
+    },
+    "allergens": [
+      "fish",
+      "salmon"
+    ],
+    "weightRange": {
+      "min": 8,
+      "max": 50,
+      "unit": "kg"
+    },
+    "notes": "?????????????"
   },
   {
     "id": "pureluxe-grain-free-cat",
     "brand": "PureLuxe",
-    "name": "PureLuxe 无谷物 鲑鱼猫粮",
+    "name": "PureLuxe ??? ????",
     "species": "cat",
     "lifeStage": "all",
-    "packageSize": { "value": 4, "unit": "kg" },
+    "packageSize": {
+      "value": 4,
+      "unit": "kg"
+    },
     "pricePerUnit": 380,
     "crossBorderAvailable": true,
     "origin": "USA",
-    "ingredients": ["鲑鱼", "鲑鱼粉", "鹰嘴豆", "豌豆", "亚麻籽", "椰子油"],
-    "nutrition": { "protein": 36, "fat": 16, "fiber": 4.5, "moisture": 10, "ash": 7, "calories": 3800 },
-    "additives": {
-      "vitamins": ["维生素E", "牛磺酸"],
-      "minerals": ["锌"]
+    "ingredients": [
+      "??",
+      "???",
+      "???",
+      "??",
+      "???",
+      "???"
+    ],
+    "nutrition": {
+      "protein": 36,
+      "fat": 16,
+      "fiber": 4.5,
+      "moisture": 10,
+      "ash": 7,
+      "calories": 3800
     },
-    "allergens": ["fish", "salmon"],
-    "notes": "单蛋白鱼配方；适合多敏猫咪"
+    "additives": {
+      "vitamins": [
+        "???E",
+        "???"
+      ],
+      "minerals": [
+        "?"
+      ]
+    },
+    "allergens": [
+      "fish",
+      "salmon"
+    ],
+    "notes": "??????"
   },
   {
     "id": "acana-freerunner-dog",
     "brand": "Acana",
-    "name": "Acana Free-Run Poultry 成犬粮",
+    "name": "Acana Free-Run Poultry ???",
     "species": "dog",
     "lifeStage": "adult",
-    "packageSize": { "value": 6, "unit": "kg" },
+    "packageSize": {
+      "value": 6,
+      "unit": "kg"
+    },
     "pricePerUnit": 520,
     "crossBorderAvailable": true,
     "origin": "Canada",
-    "ingredients": ["新鲜鸡肉", "火鸡肉", "鸡肝", "鸡蛋", "豌豆", "扁豆", "鹰嘴豆", "南瓜"],
-    "nutrition": { "protein": 31, "fat": 17, "fiber": 6, "moisture": 12, "ash": 7, "calories": 3850 },
-    "additives": {
-      "vitamins": ["维生素E"],
-      "minerals": ["锌", "铜"],
-      "preservatives": ["混合生育酚"]
+    "ingredients": [
+      "????",
+      "???",
+      "??",
+      "??",
+      "??",
+      "??",
+      "???",
+      "??"
+    ],
+    "nutrition": {
+      "protein": 31,
+      "fat": 17,
+      "fiber": 6,
+      "moisture": 12,
+      "ash": 7,
+      "calories": 3850
     },
-    "allergens": ["chicken", "poultry", "egg"],
-    "weightRange": { "min": 8, "max": 60, "unit": "kg" },
-    "notes": "加拿大高端禽肉配方"
+    "additives": {
+      "vitamins": [
+        "???E"
+      ],
+      "minerals": [
+        "?",
+        "?"
+      ],
+      "preservatives": [
+        "?????"
+      ]
+    },
+    "allergens": [
+      "chicken",
+      "poultry",
+      "egg"
+    ],
+    "weightRange": {
+      "min": 8,
+      "max": 60,
+      "unit": "kg"
+    },
+    "notes": "?????????"
   },
   {
     "id": "pro-plan-senior-cat",
     "brand": "Purina Pro Plan",
-    "name": "Pro Plan 老年猫 鸡肉配方",
+    "name": "Pro Plan ??? ????",
     "species": "cat",
     "lifeStage": "senior",
-    "packageSize": { "value": 3, "unit": "kg" },
+    "packageSize": {
+      "value": 3,
+      "unit": "kg"
+    },
     "pricePerUnit": 320,
     "crossBorderAvailable": true,
     "origin": "France",
-    "ingredients": ["鸡肉", "大米", "小麦", "玉米", "鸡脂肪", "鱼油", "甜菜粕"],
-    "nutrition": { "protein": 30, "fat": 13, "fiber": 4, "moisture": 9, "ash": 6, "calories": 3720 },
-    "additives": {
-      "vitamins": ["维生素E", "维生素C"],
-      "minerals": ["钙", "磷"],
-      "preservatives": ["BHA"]
+    "ingredients": [
+      "??",
+      "??",
+      "??",
+      "??",
+      "???",
+      "??",
+      "???"
+    ],
+    "nutrition": {
+      "protein": 30,
+      "fat": 13,
+      "fiber": 4,
+      "moisture": 9,
+      "ash": 6,
+      "calories": 3720
     },
-    "allergens": ["chicken", "wheat", "corn"],
-    "weightRange": { "min": 3, "max": 8, "unit": "kg" },
-    "notes": "部分国家禁用 BHA"
+    "additives": {
+      "vitamins": [
+        "???E",
+        "???C"
+      ],
+      "minerals": [
+        "?",
+        "?"
+      ],
+      "preservatives": [
+        "BHA"
+      ]
+    },
+    "allergens": [
+      "chicken",
+      "wheat",
+      "corn"
+    ],
+    "weightRange": {
+      "min": 3,
+      "max": 8,
+      "unit": "kg"
+    },
+    "notes": "?????? BHA"
   },
   {
     "id": "ziwi-peak-air-dried",
     "brand": "Ziwi Peak",
-    "name": "Ziwi Peak 风干牛肉猫粮",
+    "name": "Ziwi Peak ??????",
     "species": "cat",
     "lifeStage": "all",
-    "packageSize": { "value": 1, "unit": "kg" },
+    "packageSize": {
+      "value": 1,
+      "unit": "kg"
+    },
     "pricePerUnit": 880,
     "crossBorderAvailable": false,
     "origin": "New Zealand",
-    "ingredients": ["牛肉", "牛心", "牛肝", "牛肾", "新西兰绿唇贻贝", "卵磷脂"],
-    "nutrition": { "protein": 45, "fat": 23, "fiber": 2, "moisture": 14, "ash": 9, "calories": 4800 },
-    "additives": {
-      "vitamins": ["维生素E"],
-      "minerals": ["锌", "铜"]
+    "ingredients": [
+      "??",
+      "??",
+      "??",
+      "??",
+      "???????",
+      "???"
+    ],
+    "nutrition": {
+      "protein": 45,
+      "fat": 23,
+      "fiber": 2,
+      "moisture": 14,
+      "ash": 9,
+      "calories": 4800
     },
-    "allergens": ["beef"],
-    "notes": "风干工艺，单一肉源；价格高，部分地区禁运"
+    "additives": {
+      "vitamins": [
+        "???E"
+      ],
+      "minerals": [
+        "?",
+        "?"
+      ]
+    },
+    "allergens": [
+      "beef"
+    ],
+    "notes": "?????????"
+  },
+  {
+    "id": "royal-canin-indoor-cat",
+    "brand": "Royal Canin",
+    "name": "Royal Canin ?????",
+    "species": "cat",
+    "lifeStage": "adult",
+    "packageSize": {
+      "value": 4,
+      "unit": "kg"
+    },
+    "pricePerUnit": 340,
+    "crossBorderAvailable": true,
+    "origin": "France",
+    "ingredients": [
+      "????",
+      "??",
+      "??",
+      "??",
+      "????",
+      "???",
+      "??",
+      "???"
+    ],
+    "nutrition": {
+      "protein": 27,
+      "fat": 13,
+      "fiber": 5.5,
+      "moisture": 9.5,
+      "ash": 6.5,
+      "calories": 3760
+    },
+    "additives": {
+      "vitamins": [
+        "???A",
+        "???D3",
+        "???E"
+      ],
+      "minerals": [
+        "?",
+        "?"
+      ],
+      "preservatives": [
+        "BHA",
+        "BHT"
+      ]
+    },
+    "allergens": [
+      "chicken",
+      "wheat",
+      "corn"
+    ],
+    "weightRange": {
+      "min": 3,
+      "max": 6,
+      "unit": "kg"
+    },
+    "notes": "??????????????"
+  },
+  {
+    "id": "royal-canin-senior-cat",
+    "brand": "Royal Canin",
+    "name": "Royal Canin ??? 12+ ??",
+    "species": "cat",
+    "lifeStage": "senior",
+    "packageSize": {
+      "value": 4,
+      "unit": "kg"
+    },
+    "pricePerUnit": 380,
+    "crossBorderAvailable": true,
+    "origin": "France",
+    "ingredients": [
+      "????",
+      "??",
+      "??",
+      "????",
+      "???",
+      "??",
+      "???"
+    ],
+    "nutrition": {
+      "protein": 28,
+      "fat": 14,
+      "fiber": 5,
+      "moisture": 9.5,
+      "ash": 6,
+      "calories": 3820
+    },
+    "additives": {
+      "vitamins": [
+        "???A",
+        "???E",
+        "???C"
+      ],
+      "minerals": [
+        "?",
+        "?"
+      ],
+      "preservatives": [
+        "BHA"
+      ]
+    },
+    "allergens": [
+      "chicken",
+      "wheat"
+    ],
+    "weightRange": {
+      "min": 3,
+      "max": 8,
+      "unit": "kg"
+    },
+    "notes": "12 ????????"
+  },
+  {
+    "id": "royal-canin-british-shorthair",
+    "brand": "Royal Canin",
+    "name": "Royal Canin ???????",
+    "species": "cat",
+    "lifeStage": "adult",
+    "packageSize": {
+      "value": 4,
+      "unit": "kg"
+    },
+    "pricePerUnit": 460,
+    "crossBorderAvailable": true,
+    "origin": "France",
+    "ingredients": [
+      "????",
+      "??",
+      "??",
+      "????",
+      "???",
+      "??"
+    ],
+    "nutrition": {
+      "protein": 30,
+      "fat": 15,
+      "fiber": 5,
+      "moisture": 9.5,
+      "ash": 6.5,
+      "calories": 3870
+    },
+    "additives": {
+      "vitamins": [
+        "???A",
+        "???E"
+      ],
+      "minerals": [
+        "?",
+        "?"
+      ],
+      "preservatives": [
+        "BHA"
+      ]
+    },
+    "allergens": [
+      "chicken",
+      "wheat"
+    ],
+    "weightRange": {
+      "min": 4,
+      "max": 8,
+      "unit": "kg"
+    },
+    "notes": "???????????????"
+  },
+  {
+    "id": "blue-wilderness-cat",
+    "brand": "Blue Buffalo",
+    "name": "Blue Buffalo Wilderness ????",
+    "species": "cat",
+    "lifeStage": "adult",
+    "packageSize": {
+      "value": 3.6,
+      "unit": "kg"
+    },
+    "pricePerUnit": 380,
+    "crossBorderAvailable": true,
+    "origin": "USA",
+    "ingredients": [
+      "????",
+      "???",
+      "????",
+      "???",
+      "???",
+      "???"
+    ],
+    "nutrition": {
+      "protein": 40,
+      "fat": 18,
+      "fiber": 5,
+      "moisture": 10,
+      "ash": 8,
+      "calories": 3940
+    },
+    "additives": {
+      "vitamins": [
+        "???E",
+        "???C"
+      ],
+      "minerals": [
+        "?",
+        "?",
+        "?"
+      ],
+      "preservatives": [
+        "?????"
+      ]
+    },
+    "allergens": [
+      "chicken",
+      "poultry"
+    ],
+    "weightRange": {
+      "min": 3,
+      "max": 7,
+      "unit": "kg"
+    },
+    "notes": "??????"
+  },
+  {
+    "id": "blue-wilderness-kitten",
+    "brand": "Blue Buffalo",
+    "name": "Blue Buffalo Wilderness ??? ??",
+    "species": "cat",
+    "lifeStage": "puppy",
+    "packageSize": {
+      "value": 2.7,
+      "unit": "kg"
+    },
+    "pricePerUnit": 360,
+    "crossBorderAvailable": true,
+    "origin": "USA",
+    "ingredients": [
+      "????",
+      "???",
+      "????",
+      "???",
+      "???",
+      "??",
+      "???"
+    ],
+    "nutrition": {
+      "protein": 42,
+      "fat": 20,
+      "fiber": 4,
+      "moisture": 10,
+      "ash": 8,
+      "calories": 4040
+    },
+    "additives": {
+      "vitamins": [
+        "???E",
+        "???C"
+      ],
+      "minerals": [
+        "?",
+        "?",
+        "?"
+      ],
+      "preservatives": [
+        "?????"
+      ]
+    },
+    "allergens": [
+      "chicken",
+      "poultry"
+    ],
+    "weightRange": {
+      "min": 1,
+      "max": 4,
+      "unit": "kg"
+    },
+    "notes": "?????"
+  },
+  {
+    "id": "purina-one-indoor-cat",
+    "brand": "Purina ONE",
+    "name": "Purina ONE ???? ??",
+    "species": "cat",
+    "lifeStage": "adult",
+    "packageSize": {
+      "value": 3,
+      "unit": "kg"
+    },
+    "pricePerUnit": 220,
+    "crossBorderAvailable": true,
+    "origin": "Italy",
+    "ingredients": [
+      "??",
+      "??",
+      "??",
+      "???",
+      "???",
+      "???"
+    ],
+    "nutrition": {
+      "protein": 32,
+      "fat": 13,
+      "fiber": 5,
+      "moisture": 9,
+      "ash": 7,
+      "calories": 3750
+    },
+    "additives": {
+      "vitamins": [
+        "???A",
+        "???D3",
+        "???E"
+      ],
+      "minerals": [
+        "?",
+        "?"
+      ],
+      "preservatives": [
+        "BHA"
+      ]
+    },
+    "allergens": [
+      "chicken",
+      "wheat",
+      "corn",
+      "soy"
+    ],
+    "weightRange": {
+      "min": 3,
+      "max": 7,
+      "unit": "kg"
+    },
+    "notes": "???????"
+  },
+  {
+    "id": "meow-mix-original",
+    "brand": "Meow Mix",
+    "name": "Meow Mix Original Choice ??",
+    "species": "cat",
+    "lifeStage": "adult",
+    "packageSize": {
+      "value": 6.3,
+      "unit": "kg"
+    },
+    "pricePerUnit": 280,
+    "crossBorderAvailable": true,
+    "origin": "USA",
+    "ingredients": [
+      "??",
+      "??",
+      "??",
+      "????",
+      "???",
+      "??"
+    ],
+    "nutrition": {
+      "protein": 30,
+      "fat": 15,
+      "fiber": 4,
+      "moisture": 10,
+      "ash": 6.5,
+      "calories": 3700
+    },
+    "additives": {
+      "vitamins": [
+        "???E"
+      ],
+      "minerals": [
+        "?"
+      ],
+      "preservatives": [
+        "BHA",
+        "BHT"
+      ]
+    },
+    "allergens": [
+      "chicken",
+      "corn",
+      "wheat"
+    ],
+    "weightRange": {
+      "min": 3,
+      "max": 7,
+      "unit": "kg"
+    },
+    "notes": "?????"
+  },
+  {
+    "id": "fancy-feast-dry-cat",
+    "brand": "Fancy Feast",
+    "name": "Fancy Feast ?? ????",
+    "species": "cat",
+    "lifeStage": "adult",
+    "packageSize": {
+      "value": 3,
+      "unit": "kg"
+    },
+    "pricePerUnit": 260,
+    "crossBorderAvailable": true,
+    "origin": "USA",
+    "ingredients": [
+      "??",
+      "??",
+      "??",
+      "????",
+      "???"
+    ],
+    "nutrition": {
+      "protein": 34,
+      "fat": 16,
+      "fiber": 4,
+      "moisture": 10,
+      "ash": 7,
+      "calories": 3800
+    },
+    "additives": {
+      "vitamins": [
+        "???E"
+      ],
+      "minerals": [
+        "?",
+        "?"
+      ],
+      "preservatives": [
+        "BHA"
+      ]
+    },
+    "allergens": [
+      "chicken",
+      "corn",
+      "soy"
+    ],
+    "weightRange": {
+      "min": 3,
+      "max": 7,
+      "unit": "kg"
+    },
+    "notes": "???????"
+  },
+  {
+    "id": "wellness-complete-health-cat",
+    "brand": "Wellness",
+    "name": "Wellness Complete Health ??? ??",
+    "species": "cat",
+    "lifeStage": "adult",
+    "packageSize": {
+      "value": 5.4,
+      "unit": "kg"
+    },
+    "pricePerUnit": 460,
+    "crossBorderAvailable": true,
+    "origin": "USA",
+    "ingredients": [
+      "????",
+      "???",
+      "??",
+      "??",
+      "???",
+      "???"
+    ],
+    "nutrition": {
+      "protein": 32,
+      "fat": 14,
+      "fiber": 5,
+      "moisture": 10,
+      "ash": 6.5,
+      "calories": 3720
+    },
+    "additives": {
+      "vitamins": [
+        "???E",
+        "???"
+      ],
+      "minerals": [
+        "?",
+        "?"
+      ],
+      "preservatives": [
+        "?????"
+      ]
+    },
+    "allergens": [
+      "chicken",
+      "poultry"
+    ],
+    "weightRange": {
+      "min": 3,
+      "max": 7,
+      "unit": "kg"
+    },
+    "notes": "?????"
+  },
+  {
+    "id": "myfoodie-cat-adult",
+    "brand": "???",
+    "name": "??? ???? ??? ???",
+    "species": "cat",
+    "lifeStage": "adult",
+    "packageSize": {
+      "value": 2,
+      "unit": "kg"
+    },
+    "pricePerUnit": 110,
+    "crossBorderAvailable": false,
+    "origin": "????",
+    "ingredients": [
+      "???",
+      "??",
+      "??",
+      "??",
+      "??",
+      "???",
+      "????"
+    ],
+    "nutrition": {
+      "protein": 30,
+      "fat": 14,
+      "fiber": 4,
+      "moisture": 10,
+      "ash": 7,
+      "calories": 3700
+    },
+    "additives": {
+      "vitamins": [
+        "???A",
+        "???E"
+      ],
+      "minerals": [
+        "?",
+        "?",
+        "?"
+      ],
+      "preservatives": [
+        "BHA"
+      ]
+    },
+    "allergens": [
+      "fish",
+      "salmon",
+      "chicken",
+      "corn"
+    ],
+    "weightRange": {
+      "min": 3,
+      "max": 7,
+      "unit": "kg"
+    },
+    "notes": "?????????"
+  },
+  {
+    "id": "royal-canin-small-adult",
+    "brand": "Royal Canin",
+    "name": "Royal Canin ??????",
+    "species": "dog",
+    "lifeStage": "adult",
+    "packageSize": {
+      "value": 4,
+      "unit": "kg"
+    },
+    "pricePerUnit": 380,
+    "crossBorderAvailable": true,
+    "origin": "France",
+    "ingredients": [
+      "????",
+      "??",
+      "??",
+      "????",
+      "???",
+      "??"
+    ],
+    "nutrition": {
+      "protein": 27,
+      "fat": 16,
+      "fiber": 4.5,
+      "moisture": 9.5,
+      "ash": 6,
+      "calories": 3920
+    },
+    "additives": {
+      "vitamins": [
+        "???A",
+        "???D3",
+        "???E"
+      ],
+      "minerals": [
+        "?",
+        "?"
+      ],
+      "preservatives": [
+        "BHA",
+        "BHT"
+      ]
+    },
+    "allergens": [
+      "chicken",
+      "wheat",
+      "corn"
+    ],
+    "weightRange": {
+      "min": 4,
+      "max": 10,
+      "unit": "kg"
+    },
+    "notes": "10kg ??????"
+  },
+  {
+    "id": "royal-canin-large-adult",
+    "brand": "Royal Canin",
+    "name": "Royal Canin ??????",
+    "species": "dog",
+    "lifeStage": "adult",
+    "packageSize": {
+      "value": 15,
+      "unit": "kg"
+    },
+    "pricePerUnit": 720,
+    "crossBorderAvailable": true,
+    "origin": "France",
+    "ingredients": [
+      "????",
+      "??",
+      "??",
+      "????",
+      "???",
+      "??",
+      "?????"
+    ],
+    "nutrition": {
+      "protein": 26,
+      "fat": 17,
+      "fiber": 4.5,
+      "moisture": 9.5,
+      "ash": 6,
+      "calories": 3950
+    },
+    "additives": {
+      "vitamins": [
+        "???A",
+        "???D3",
+        "???E"
+      ],
+      "minerals": [
+        "?",
+        "?",
+        "?"
+      ],
+      "preservatives": [
+        "BHA",
+        "BHT"
+      ]
+    },
+    "allergens": [
+      "chicken",
+      "wheat",
+      "corn"
+    ],
+    "weightRange": {
+      "min": 25,
+      "max": 60,
+      "unit": "kg"
+    },
+    "notes": "?????????"
+  },
+  {
+    "id": "royal-canin-senior-dog",
+    "brand": "Royal Canin",
+    "name": "Royal Canin ??? 8+ ??",
+    "species": "dog",
+    "lifeStage": "senior",
+    "packageSize": {
+      "value": 7.5,
+      "unit": "kg"
+    },
+    "pricePerUnit": 480,
+    "crossBorderAvailable": true,
+    "origin": "France",
+    "ingredients": [
+      "????",
+      "??",
+      "??",
+      "????",
+      "???",
+      "??"
+    ],
+    "nutrition": {
+      "protein": 24,
+      "fat": 13,
+      "fiber": 5.5,
+      "moisture": 9.5,
+      "ash": 5.5,
+      "calories": 3720
+    },
+    "additives": {
+      "vitamins": [
+        "???A",
+        "???D3",
+        "???E"
+      ],
+      "minerals": [
+        "?",
+        "?"
+      ],
+      "preservatives": [
+        "BHA"
+      ]
+    },
+    "allergens": [
+      "chicken",
+      "wheat",
+      "corn"
+    ],
+    "weightRange": {
+      "min": 5,
+      "max": 40,
+      "unit": "kg"
+    },
+    "notes": "8 ??????"
+  },
+  {
+    "id": "blue-life-protection-dog",
+    "brand": "Blue Buffalo",
+    "name": "Blue Buffalo Life Protection ?? ??",
+    "species": "dog",
+    "lifeStage": "adult",
+    "packageSize": {
+      "value": 6.8,
+      "unit": "kg"
+    },
+    "pricePerUnit": 460,
+    "crossBorderAvailable": true,
+    "origin": "USA",
+    "ingredients": [
+      "????",
+      "???",
+      "??",
+      "??",
+      "???",
+      "???"
+    ],
+    "nutrition": {
+      "protein": 26,
+      "fat": 15,
+      "fiber": 6,
+      "moisture": 10,
+      "ash": 7,
+      "calories": 3760
+    },
+    "additives": {
+      "vitamins": [
+        "???E",
+        "???C"
+      ],
+      "minerals": [
+        "?",
+        "?",
+        "?"
+      ],
+      "preservatives": [
+        "?????"
+      ]
+    },
+    "allergens": [
+      "chicken",
+      "poultry"
+    ],
+    "weightRange": {
+      "min": 8,
+      "max": 50,
+      "unit": "kg"
+    },
+    "notes": "???????"
+  },
+  {
+    "id": "pedigree-adult-dog",
+    "brand": "Pedigree",
+    "name": "Pedigree ?? ?? ????",
+    "species": "dog",
+    "lifeStage": "adult",
+    "packageSize": {
+      "value": 10,
+      "unit": "kg"
+    },
+    "pricePerUnit": 280,
+    "crossBorderAvailable": true,
+    "origin": "Thailand",
+    "ingredients": [
+      "???",
+      "??",
+      "???",
+      "??",
+      "????",
+      "??"
+    ],
+    "nutrition": {
+      "protein": 22,
+      "fat": 12,
+      "fiber": 5,
+      "moisture": 10,
+      "ash": 7,
+      "calories": 3600
+    },
+    "additives": {
+      "vitamins": [
+        "???A",
+        "???E"
+      ],
+      "minerals": [
+        "?",
+        "?",
+        "?"
+      ],
+      "preservatives": [
+        "BHA",
+        "BHT"
+      ]
+    },
+    "allergens": [
+      "chicken",
+      "corn",
+      "wheat",
+      "soy"
+    ],
+    "weightRange": {
+      "min": 8,
+      "max": 50,
+      "unit": "kg"
+    },
+    "notes": "??????????????"
+  },
+  {
+    "id": "nutro-lamb-dog",
+    "brand": "Nutro",
+    "name": "Nutro ???? ??",
+    "species": "dog",
+    "lifeStage": "adult",
+    "packageSize": {
+      "value": 6.8,
+      "unit": "kg"
+    },
+    "pricePerUnit": 480,
+    "crossBorderAvailable": true,
+    "origin": "USA",
+    "ingredients": [
+      "??",
+      "???",
+      "??",
+      "??",
+      "???",
+      "???"
+    ],
+    "nutrition": {
+      "protein": 24,
+      "fat": 14,
+      "fiber": 4.5,
+      "moisture": 10,
+      "ash": 6.5,
+      "calories": 3700
+    },
+    "additives": {
+      "vitamins": [
+        "???E",
+        "???C"
+      ],
+      "minerals": [
+        "?",
+        "?"
+      ],
+      "preservatives": [
+        "?????"
+      ]
+    },
+    "allergens": [
+      "lamb",
+      "beef"
+    ],
+    "weightRange": {
+      "min": 8,
+      "max": 45,
+      "unit": "kg"
+    },
+    "notes": "?????????????"
+  },
+  {
+    "id": "orijen-senior-dog",
+    "brand": "Orijen",
+    "name": "Orijen Senior ??????",
+    "species": "dog",
+    "lifeStage": "senior",
+    "packageSize": {
+      "value": 5.9,
+      "unit": "kg"
+    },
+    "pricePerUnit": 720,
+    "crossBorderAvailable": true,
+    "origin": "Canada",
+    "ingredients": [
+      "????",
+      "?????",
+      "????",
+      "????",
+      "??",
+      "??",
+      "??"
+    ],
+    "nutrition": {
+      "protein": 38,
+      "fat": 15,
+      "fiber": 8,
+      "moisture": 12,
+      "ash": 8,
+      "calories": 3880
+    },
+    "additives": {
+      "vitamins": [
+        "???E",
+        "???C"
+      ],
+      "minerals": [
+        "?",
+        "?",
+        "?"
+      ],
+      "preservatives": [
+        "?????"
+      ]
+    },
+    "allergens": [
+      "chicken",
+      "poultry",
+      "fish",
+      "egg"
+    ],
+    "weightRange": {
+      "min": 5,
+      "max": 40,
+      "unit": "kg"
+    },
+    "notes": "???????"
+  },
+  {
+    "id": "wellness-core-ocean-dog",
+    "brand": "Wellness Core",
+    "name": "Wellness Core Ocean ????",
+    "species": "dog",
+    "lifeStage": "adult",
+    "packageSize": {
+      "value": 5.9,
+      "unit": "kg"
+    },
+    "pricePerUnit": 540,
+    "crossBorderAvailable": true,
+    "origin": "USA",
+    "ingredients": [
+      "???",
+      "???",
+      "??",
+      "???",
+      "????",
+      "???",
+      "??"
+    ],
+    "nutrition": {
+      "protein": 34,
+      "fat": 16,
+      "fiber": 5,
+      "moisture": 10,
+      "ash": 7.5,
+      "calories": 3880
+    },
+    "additives": {
+      "vitamins": [
+        "???E",
+        "???C"
+      ],
+      "minerals": [
+        "?",
+        "?"
+      ],
+      "preservatives": [
+        "?????"
+      ]
+    },
+    "allergens": [
+      "fish",
+      "salmon"
+    ],
+    "weightRange": {
+      "min": 8,
+      "max": 50,
+      "unit": "kg"
+    },
+    "notes": "?????"
+  },
+  {
+    "id": "hills-science-diet-adult-dog",
+    "brand": "Hill's Science Diet",
+    "name": "Hill's Science Diet ?? ??",
+    "species": "dog",
+    "lifeStage": "adult",
+    "packageSize": {
+      "value": 7,
+      "unit": "kg"
+    },
+    "pricePerUnit": 460,
+    "crossBorderAvailable": true,
+    "origin": "USA",
+    "ingredients": [
+      "???",
+      "??",
+      "??",
+      "???",
+      "????",
+      "???"
+    ],
+    "nutrition": {
+      "protein": 24,
+      "fat": 15,
+      "fiber": 4,
+      "moisture": 9,
+      "ash": 5.5,
+      "calories": 3720
+    },
+    "additives": {
+      "vitamins": [
+        "???E",
+        "???C"
+      ],
+      "minerals": [
+        "?",
+        "?",
+        "?"
+      ],
+      "preservatives": [
+        "???",
+        "?????"
+      ]
+    },
+    "allergens": [
+      "chicken"
+    ],
+    "weightRange": {
+      "min": 5,
+      "max": 40,
+      "unit": "kg"
+    },
+    "notes": "????"
+  },
+  {
+    "id": "pro-plan-puppy-dog",
+    "brand": "Purina Pro Plan",
+    "name": "Pro Plan ?? ????",
+    "species": "dog",
+    "lifeStage": "puppy",
+    "packageSize": {
+      "value": 7,
+      "unit": "kg"
+    },
+    "pricePerUnit": 520,
+    "crossBorderAvailable": true,
+    "origin": "France",
+    "ingredients": [
+      "??",
+      "??",
+      "??",
+      "????",
+      "??",
+      "??"
+    ],
+    "nutrition": {
+      "protein": 30,
+      "fat": 18,
+      "fiber": 3,
+      "moisture": 9.5,
+      "ash": 7,
+      "calories": 4000
+    },
+    "additives": {
+      "vitamins": [
+        "???A",
+        "???D3",
+        "???E"
+      ],
+      "minerals": [
+        "?",
+        "?",
+        "?"
+      ],
+      "preservatives": [
+        "BHA"
+      ]
+    },
+    "allergens": [
+      "chicken",
+      "wheat",
+      "corn"
+    ],
+    "weightRange": {
+      "min": 1,
+      "max": 25,
+      "unit": "kg"
+    },
+    "notes": "????????"
+  },
+  {
+    "id": "myfoodie-adult-dog",
+    "brand": "???",
+    "name": "??? ???? ??? ???",
+    "species": "dog",
+    "lifeStage": "adult",
+    "packageSize": {
+      "value": 2,
+      "unit": "kg"
+    },
+    "pricePerUnit": 90,
+    "crossBorderAvailable": false,
+    "origin": "????",
+    "ingredients": [
+      "??",
+      "??",
+      "??",
+      "??",
+      "???",
+      "??"
+    ],
+    "nutrition": {
+      "protein": 24,
+      "fat": 12,
+      "fiber": 5,
+      "moisture": 10,
+      "ash": 8,
+      "calories": 3500
+    },
+    "additives": {
+      "vitamins": [
+        "???A",
+        "???E"
+      ],
+      "minerals": [
+        "?",
+        "?"
+      ],
+      "preservatives": [
+        "BHA"
+      ]
+    },
+    "allergens": [
+      "beef",
+      "chicken",
+      "corn",
+      "soy"
+    ],
+    "weightRange": {
+      "min": 5,
+      "max": 30,
+      "unit": "kg"
+    },
+    "notes": "????"
   }
 ]

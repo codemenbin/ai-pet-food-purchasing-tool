@@ -1,4 +1,4 @@
-﻿/**
+/**
  * LLM mock: 基于 prompt 关键词的确定性响应
  * - 不依赖外部网络
  * - 返回结构化 JSON 字符串（与真实 LLM 行为对齐，方便 JSON.parse）
@@ -15,31 +15,44 @@ function pickTop<T>(pool: T[], n: number): T[] {
   return pool.slice(0, n);
 }
 
+// 仅从【宠物信息】块中识别物种，避免被候选商品 ID 中的 "cat" 误导
+function detectSpecies(prompt: string): "cat" | "dog" {
+  // 找【宠物信息】到【候选商品】之间的段落
+  const m = prompt.match(/【宠物信息】([sS]*?)【候选商品】/);
+  const block = m ? m[1] : prompt;
+  if (block.includes("物种: 猫")) return "cat";
+  if (block.includes("物种: 狗")) return "dog";
+  // 兜底：依然用 "猫" / "狗" 字面量
+  if (block.includes("猫")) return "cat";
+  if (block.includes("狗")) return "dog";
+  return "dog";
+}
+
 export function getMockResponse(prompt: string, _opts: LLMOptions): string {
   const isCompare = prompt.includes("对比") || prompt.includes("配料表对比") || prompt.includes("compare");
   const isRecommend = prompt.includes("推荐") || prompt.includes("recommend");
 
   if (isCompare) {
-    // 解析 productIds（prompt 中包含产品 ID 列表 JSON）
+    // 解析 productIds（prompt 中包含产品 ID 列表）
     const idMatch = prompt.match(/productIds=([a-z0-9,\-]+)/i);
     const productIds = idMatch ? idMatch[1].split(",") : ["acana-cat-adult", "wellness-core-grain-free-cat"];
     const ranking = productIds.slice();
     const verdict =
       productIds.length === 2
-        ? `【mock 裁决】综合适配度，A 略优于 B：若宠物敏感禽肉建议 B；若注重营养密度选 A。`
-        : `【mock 裁决】三款排序：${ranking[0]} > ${ranking[1]} > ${ranking[2]}。建议结合过敏史与预算综合决策。`;
+        ? "【mock 裁决】综合适配度，A 略优于 B：若宠物敏感禽肉建议 B；若注重营养密度选 A。"
+        : "【mock 裁决】三款排序：" + ranking[0] + " > " + ranking[1] + " > " + ranking[2] + "。建议结合过敏史与预算综合决策。";
     return JSON.stringify({ ranking, verdict });
   }
 
   if (isRecommend) {
-    const species = prompt.toLowerCase().includes("cat") || prompt.includes("猫") ? "cat" : "dog";
+    const species = detectSpecies(prompt);
     const pool = species === "cat" ? MOCK_CAT_POOL : MOCK_DOG_POOL;
     const top = pickTop(pool, 3);
     const recommendations = top.map((id, i) => ({
       productId: id,
       rank: i + 1,
       score: 90 - i * 5,
-      reason: `【mock】基于宠物阶段与过敏信息，${id} 匹配度高；建议优先试用小包装观察 7 天。`,
+      reason: "【mock】基于宠物阶段与过敏信息，" + id + " 匹配度高；建议优先试用小包装观察 7 天。",
     }));
     const summary =
       "【mock】综合考虑物种、阶段、过敏与预算，推荐以上 3 款。可在『配料表对比』页面对两款做更细致比对。";

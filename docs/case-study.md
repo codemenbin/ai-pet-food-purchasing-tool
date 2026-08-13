@@ -1,4 +1,4 @@
-﻿# 案例分享：AI 制表平台（前端负责人 + 部分后端）
+# 案例分享：AI 制表平台（前端负责人 + 部分后端）
 
 > 面试作业 Part 1。从过往工作中挑选最困难、最值得分享的项目，按五层架构（Structure / Behavior / Data Layer / Interface / Infra）展开。
 

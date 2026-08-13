@@ -1,5 +1,5 @@
-﻿import { testApiHandler } from "next-test-api-route-handler";
-import * as appHandler from "@/app/api/compare/route";
+import { testApiHandler } from "next-test-api-route-handler";
+import { POST as comparePOST } from "@/app/api/compare/route";
 import { describe, expect, it, beforeAll, afterAll } from "vitest";
 
 const ORIGINAL_ENV = { ...process.env };
@@ -18,6 +18,7 @@ describe("POST /api/compare", () => {
     species: "cat",
     breed: "Persian",
     ageStage: "adult",
+    ageMonths: 36,
     weightKg: 4,
     knownAllergens: ["chicken"],
     monthlyBudgetCNY: 400,
@@ -26,7 +27,7 @@ describe("POST /api/compare", () => {
 
   it("2 款商品合法", async () => {
     await testApiHandler({
-      appHandler,
+      appHandler: { POST: comparePOST },
       async test({ fetch }) {
         const res = await fetch({
           method: "POST",
@@ -50,7 +51,7 @@ describe("POST /api/compare", () => {
 
   it("3 款商品合法", async () => {
     await testApiHandler({
-      appHandler,
+      appHandler: { POST: comparePOST },
       async test({ fetch }) {
         const res = await fetch({
           method: "POST",
@@ -74,7 +75,7 @@ describe("POST /api/compare", () => {
 
   it("少于 2 款商品返回 400", async () => {
     await testApiHandler({
-      appHandler,
+      appHandler: { POST: comparePOST },
       async test({ fetch }) {
         const res = await fetch({
           method: "POST",
@@ -91,7 +92,7 @@ describe("POST /api/compare", () => {
 
   it("超过 3 款商品返回 400", async () => {
     await testApiHandler({
-      appHandler,
+      appHandler: { POST: comparePOST },
       async test({ fetch }) {
         const res = await fetch({
           method: "POST",
@@ -108,7 +109,7 @@ describe("POST /api/compare", () => {
 
   it("不存在 productId 返回 400", async () => {
     await testApiHandler({
-      appHandler,
+      appHandler: { POST: comparePOST },
       async test({ fetch }) {
         const res = await fetch({
           method: "POST",
@@ -125,7 +126,7 @@ describe("POST /api/compare", () => {
 
   it("物种不一致返回 400", async () => {
     await testApiHandler({
-      appHandler,
+      appHandler: { POST: comparePOST },
       async test({ fetch }) {
         const res = await fetch({
           method: "POST",

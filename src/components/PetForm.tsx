@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
 import type { PetInfo, LifeStage, Species } from "@/types";
@@ -24,11 +24,26 @@ const STAGE_OPTIONS: { value: LifeStage; label: string }[] = [
 
 const ALLERGEN_PRESETS = ["chicken", "beef", "fish", "grain", "wheat", "corn"];
 
+// 根据月龄推导阶段（用户也可手动覆盖）
+function deriveStage(months: number): LifeStage {
+  if (months < 12) return "puppy";
+  if (months < 84) return "adult";
+  return "senior";
+}
+
+function monthAgeLabel(m: number): string {
+  if (m < 12) return m + " 月龄";
+  const y = Math.floor(m / 12);
+  const rem = m % 12;
+  return rem === 0 ? y + " 岁" : y + " 岁 " + rem + " 月";
+}
+
 export default function PetForm({ initial, compact, onChange }: PetFormProps) {
   const [value, setValue] = useState<PetInfo>({
     species: initial?.species ?? "cat",
     breed: initial?.breed ?? "中华田园",
     ageStage: initial?.ageStage ?? "adult",
+    ageMonths: initial?.ageMonths ?? 48,
     weightKg: initial?.weightKg ?? 4,
     knownAllergens: initial?.knownAllergens ?? [],
     monthlyBudgetCNY: initial?.monthlyBudgetCNY ?? 400,
@@ -79,6 +94,24 @@ export default function PetForm({ initial, compact, onChange }: PetFormProps) {
               </option>
             ))}
           </select>
+        </Field>
+        <Field label={"月龄（" + monthAgeLabel(value.ageMonths) + "）"}>
+          <input
+            className="input"
+            type="number"
+            min={0}
+            max={360}
+            step={1}
+            value={value.ageMonths}
+            onChange={(e) => {
+              const m = Math.max(0, Math.min(360, Number(e.target.value) || 0));
+              // 一次性更新两个字段，避免连续 update() 因闭包共享 value 导致后者覆盖前者
+              const next = { ...value, ageMonths: m, ageStage: deriveStage(m) };
+              setValue(next);
+              onChange?.(next);
+            }}
+            data-testid="pet-age-months"
+          />
         </Field>
         <Field label="品种">
           <input
@@ -151,7 +184,6 @@ export default function PetForm({ initial, compact, onChange }: PetFormProps) {
         </p>
       )}
 
-      {/* 当前值序列化，供测试断言 */}
       <input
         type="hidden"
         data-testid="pet-form-value"
@@ -170,3 +202,4 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
     </label>
   );
 }
+

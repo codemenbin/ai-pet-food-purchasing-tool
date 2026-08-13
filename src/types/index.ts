@@ -1,4 +1,4 @@
-﻿import { z } from "zod";
+import { z } from "zod";
 
 // ============================================================
 // 枚举与基础类型
@@ -23,7 +23,7 @@ export const NutritionSchema = z.object({
   fiber: z.number().min(0).max(100),
   moisture: z.number().min(0).max(100),
   ash: z.number().min(0).max(100),
-  calories: z.number().min(0).max(10000), // kcal/kg
+  calories: z.number().min(0).max(10000),
 });
 export type Nutrition = z.infer<typeof NutritionSchema>;
 
@@ -66,12 +66,15 @@ export type Product = z.infer<typeof ProductSchema>;
 
 // ============================================================
 // 宠物信息 PetInfo
+// - ageStage: 阶段枚举，用于商品粗粒度匹配
+// - ageMonths: 实际月龄，用于细粒度展示与 LLM 上下文
 // ============================================================
 
 export const PetInfoSchema = z.object({
   species: SpeciesSchema,
   breed: z.string().min(1).max(80),
   ageStage: LifeStageSchema,
+  ageMonths: z.number().int().min(0).max(360).default(48),
   weightKg: z.number().positive().max(200),
   knownAllergens: z.array(z.string()).default([]),
   monthlyBudgetCNY: z.number().positive().max(100000),
@@ -148,3 +151,4 @@ export const CompareResponseSchema = z.object({
   source: z.enum(["llm", "rule", "mock"]),
 });
 export type CompareResponse = z.infer<typeof CompareResponseSchema>;
+
