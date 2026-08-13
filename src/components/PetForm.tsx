@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { PetInfo, LifeStage, Species } from "@/types";
 
 export type PetFormValue = PetInfo;
@@ -24,6 +24,17 @@ const STAGE_OPTIONS: { value: LifeStage; label: string }[] = [
 
 const ALLERGEN_PRESETS = ["chicken", "beef", "fish", "grain", "wheat", "corn"];
 
+export const defaultPet: PetInfo = {
+  species: "cat",
+  breed: "中华田园",
+  ageStage: "adult",
+  ageMonths: 48,
+  weightKg: 4,
+  knownAllergens: [],
+  monthlyBudgetCNY: 400,
+  destinationCountry: "中国大陆",
+};
+
 // 根据月龄推导阶段（用户也可手动覆盖）
 function deriveStage(months: number): LifeStage {
   if (months < 12) return "puppy";
@@ -40,15 +51,15 @@ function monthAgeLabel(m: number): string {
 
 export default function PetForm({ initial, compact, onChange }: PetFormProps) {
   const [value, setValue] = useState<PetInfo>({
-    species: initial?.species ?? "cat",
-    breed: initial?.breed ?? "中华田园",
-    ageStage: initial?.ageStage ?? "adult",
-    ageMonths: initial?.ageMonths ?? 48,
-    weightKg: initial?.weightKg ?? 4,
-    knownAllergens: initial?.knownAllergens ?? [],
-    monthlyBudgetCNY: initial?.monthlyBudgetCNY ?? 400,
-    destinationCountry: initial?.destinationCountry ?? "中国大陆",
+    ...defaultPet,
+    ...initial,
   });
+
+  // mount 时把默认值一次性通知父组件，避免页面在用户未交互时按钮一直 disabled
+  useEffect(() => {
+    onChange?.(value);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   function update<K extends keyof PetInfo>(key: K, v: PetInfo[K]) {
     const next = { ...value, [key]: v };

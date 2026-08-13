@@ -37,6 +37,6 @@ test("月龄输入可被修改并联动阶段（回归测试）", async ({ page 
   await page.getByTestId("submit-recommend").click();
   const req = await reqPromise;
   const body = JSON.parse(req.postData() || "{}");
-  expect(body.ageMonths).toBe(120);
-  expect(body.ageStage).toBe("senior");
+  expect(body.pet.ageMonths).toBe(120);
+  expect(body.pet.ageStage).toBe("senior");
 });

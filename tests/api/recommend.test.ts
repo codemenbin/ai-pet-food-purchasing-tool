@@ -32,7 +32,7 @@ describe("POST /api/recommend", () => {
         const res = await fetch({
           method: "POST",
           headers: { "content-type": "application/json" },
-          body: JSON.stringify(basePet),
+          body: JSON.stringify({ pet: basePet }),
         });
         expect(res.status).toBe(200);
         const body = await res.json();
@@ -51,7 +51,7 @@ describe("POST /api/recommend", () => {
         const res = await fetch({
           method: "POST",
           headers: { "content-type": "application/json" },
-          body: JSON.stringify({ ...basePet, species: "dog" }),
+          body: JSON.stringify({ pet: { ...basePet, species: "dog" } }),
         });
         expect(res.status).toBe(200);
         const body = await res.json();

@@ -1,12 +1,14 @@
 /**
  * POST /api/compare
- * body: { productIds: string[2-3], pet: PetInfo }
+ * body: { productIds: string[2-3], pet: PetInfo, userProducts?: UserProduct[] }
  * returns: CompareResponse
+ *
+ * 对比候选 = 内置商品库 + 客户端用户商品
  */
 
 import { NextResponse } from "next/server";
 import { z } from "zod";
-import { CompareResponseSchema, PetInfoSchema } from "@/types";
+import { CompareResponseSchema, PetInfoSchema, UserProductSchema, type Product } from "@/types";
 import { callLLM, isMockMode } from "@/lib/llm";
 import { buildComparePrompt } from "@/lib/prompts";
 import {
@@ -20,15 +22,12 @@ import type { CompareResponse } from "@/types";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-// 反引号常量：用 String.fromCharCode 构造
 const BT = String.fromCharCode(96);
 
 const BodySchema = z.object({
-  productIds: z
-    .array(z.string().min(1))
-    .min(2)
-    .max(3),
+  productIds: z.array(z.string().min(1)).min(2).max(3),
   pet: PetInfoSchema,
+  userProducts: z.array(UserProductSchema).max(100).optional(),
 });
 
 export async function POST(req: Request): Promise<NextResponse> {
@@ -48,21 +47,27 @@ export async function POST(req: Request): Promise<NextResponse> {
   }
 
   const { productIds, pet } = parsed.data;
+  const userProducts = parsed.data.userProducts ?? [];
 
-  // 拉取商品池（live → cache → mock 三层回退）
   const fetched = await fetchProducts();
-  const products = fetched.products;
+  const builtin: Product[] = fetched.products;
+  const userAsProduct: Product[] = userProducts.map((p) => {
+    const { meta: _meta, ...rest } = p;
+    return rest;
+  });
+  const allProducts: Product[] = builtin.concat(userAsProduct);
 
-  // 校验 productIds 存在
-  const selectedProducts = products.filter((p) => productIds.includes(p.id));
+  const selectedProducts = allProducts.filter((p) => productIds.includes(p.id));
   if (selectedProducts.length !== productIds.length) {
     return NextResponse.json(
-      { error: "部分 productId 不存在", missing: productIds.filter((id) => !products.some((p) => p.id === id)) },
+      {
+        error: "部分 productId 不存在",
+        missing: productIds.filter((id) => !allProducts.some((p) => p.id === id)),
+      },
       { status: 400 }
     );
   }
 
-  // 物种必须一致
   const species = new Set(selectedProducts.map((p) => p.species));
   if (species.size > 1) {
     return NextResponse.json(
@@ -77,16 +82,13 @@ export async function POST(req: Request): Promise<NextResponse> {
     );
   }
 
-  // 计算结构化部分
   const nutritionDiffs = computeNutritionDiffs(selectedProducts);
   const scores = scoreProducts(selectedProducts, pet);
 
-  // 尝试 LLM 裁决
   let llmPart: { ranking?: string[]; verdict?: string } | undefined;
   try {
     const prompt = buildComparePrompt(pet, selectedProducts, nutritionDiffs, scores);
     const raw = await callLLM(prompt);
-    // 容忍 markdown code fence
     const fenceOpen = new RegExp("^" + BT + BT + BT + "json\\s*", "i");
     const fenceClose = new RegExp(BT + BT + BT + "\\s*$");
     const cleaned = raw.replace(fenceOpen, "").replace(fenceClose, "").trim();
@@ -94,16 +96,16 @@ export async function POST(req: Request): Promise<NextResponse> {
     const jsonStr = jsonStart >= 0 ? cleaned.slice(jsonStart) : cleaned;
     const obj = JSON.parse(jsonStr);
     if (typeof obj.verdict === "string") llmPart = { verdict: obj.verdict };
-    if (Array.isArray(obj.ranking)) llmPart = { ...llmPart, ranking: (obj.ranking as unknown[]).filter((id: unknown): id is string => typeof id === "string") };
+    if (Array.isArray(obj.ranking))
+      llmPart = {
+        ...llmPart,
+        ranking: (obj.ranking as unknown[]).filter((id: unknown): id is string => typeof id === "string"),
+      };
   } catch {
     // 静默回退
   }
 
-  const source: CompareResponse["source"] = llmPart
-    ? isMockMode()
-      ? "mock"
-      : "llm"
-    : "rule";
+  const source: CompareResponse["source"] = llmPart ? (isMockMode() ? "mock" : "llm") : "rule";
 
   const response: CompareResponse = {
     ...buildCompareResponse(pet, selectedProducts, llmPart),

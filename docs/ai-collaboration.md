@@ -173,6 +173,58 @@ if (candidates.length === 0) {
 
 ---
 
+### 3.6 调优点 6：可扩展商品池——localStorage + LLM 视觉 + rule-based 三层兜底
+
+**背景**：用户实测反馈「内置 31 款商品太少、遇到小众 / 新品 / 跨境独有商品无法推荐」。需要让用户能把自己手里的宠物粮加进来参与推荐 / 对比。
+
+**AI 初版思路**：单做一个文件上传组件，把图片 POST 给后端；后端直接调 LLM 解析。问题：
+- LLM 失败时整个添加流程就崩
+- 用户商品没法跨页面复用（推荐页加了一款，对比页还要重新加）
+- 没有「手动填品牌名」的入口，不会上传图片的用户被劝退
+
+**调优后（三层架构）**：
+
+1. **存储层** — `src/lib/userProducts.ts`
+   - localStorage 持久化（key `ai-pet-food.userProducts.v1`），无服务端 DB 依赖
+   - `safeParse` 内部用 `UserProductSchema.safeParse` 逐项校验，坏数据静默丢弃
+   - 比较页临时选中独立存（`ai-pet-food.compareSelection.v1`），避免污染主库
+   - `addToCompareSelection` 内置 max=3 截断，UI 层不必再校验
+   - SSR 安全：`hasWindow()` 守卫，server 端返回空数组而非 crash
+
+2. **解析层** — `src/lib/productParser.ts`
+   - 输入：品牌 + 名称 + 可选成分 + 可选图片 dataURL
+   - 路径 A：`isMockMode()` → 直接 `ruleBasedProduct`（confidence 0.3），零网络 / 零 Key
+   - 路径 B：真实 LLM → `callLLMMessages` 支持 vision（OpenAI `image_url` content part）
+   - 路径 C：LLM 输出不符合 schema / JSON.parse 失败 → 自动 catch 走 `ruleBasedProduct` + warning
+   - `detectSpecies` / `detectLifeStage` 用正则做兜底识别（中英文都支持）
+
+3. **API 层** — `src/app/api/products/parse/route.ts`
+   - Body 校验用 Zod，图片大小限制 5MB
+   - 返回 `{ product, confidence, warnings, source }` 四元组，前端可透明展示「这条数据是 AI 推断的 / 用户手填的」
+
+4. **候选池合并** — `src/app/api/{recommend,compare}/route.ts`
+   - Body 新增 `userProducts?: UserProduct[]` 字段
+   - 服务端 `builtin.concat(userAsProduct)` 合并池；用户商品 strip 掉 `meta.imageDataUrl`（避免 5MB 字符串塞请求体）
+   - 物种过滤 + LLM Prompt 都基于合并后的池
+   - 返回值里 `source: "user" | "ai" | "builtin"` 透传给前端，UI 可标注数据出处
+
+5. **UI 层** — `src/app/products/add/page.tsx` + `src/components/ProductInputForm.tsx`
+   - 三种入口：纯手填 / 手填 + 图片 / 仅图片（OCR 推断品牌）
+   - 解析后展示 `confidence + warnings`，让用户自己决定是否采纳
+   - 推荐结果卡上加 `+ 加入对比` 按钮 + 顶部 `→ 去对比页` 入口
+
+**测试覆盖**（共 +23 用例）：
+- `tests/unit/userProducts.test.ts`（12 例）：ID 生成器 / CRUD / 损坏数据 / 静默丢弃非法项 / compare selection max=3
+- `tests/unit/productParser.test.ts`（6 例）：mock 模式走 rule-based / 物种 / 阶段 / 成分拆分 / 默认占位
+- `tests/api/products-parse.test.ts`（5 例）：happy path / 缺参 / 非法 enum / 非法 JSON / 成分拆分
+
+**效果**：
+- 用户从「只能选内置 31 款」→「内置 51 款 + 自定义无限」
+- LLM 失败不阻塞添加流程（rule-based 兜底 + warnings 透明化）
+- 数据出处可追溯（每条推荐 / 对比结果都标注 source）
+- 面试官演示可加：先选内置 cat → 推荐皇家 / acana；然后去 `/products/add` 上传一张真实包装图 → 重新推荐 → 看到用户商品进入候选池
+
+
 ## 四、AI 协作的边界
 
 - **不参与**：业务策略（如选粮逻辑的领域知识）、最终决策（哪些功能做、哪些不做）

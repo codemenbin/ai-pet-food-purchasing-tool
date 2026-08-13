@@ -1682,5 +1682,1032 @@
       "unit": "kg"
     },
     "notes": "????"
+  },
+  {
+    "id": "orijen-cat-and-kitten",
+    "brand": "Orijen",
+    "name": "Cat & Kitten 高肉无谷",
+    "species": "cat",
+    "lifeStage": "all",
+    "packageSize": {
+      "value": 1.8,
+      "unit": "kg"
+    },
+    "pricePerUnit": 540,
+    "crossBorderAvailable": true,
+    "origin": "Canada",
+    "ingredients": [
+      "新鲜鸡肉",
+      "新鲜火鸡肉",
+      "新鲜鸡蛋",
+      "鸡肝",
+      "鱼油",
+      "南瓜",
+      "菠菜"
+    ],
+    "nutrition": {
+      "protein": 40,
+      "fat": 20,
+      "fiber": 3,
+      "moisture": 10,
+      "ash": 8,
+      "calories": 4100
+    },
+    "additives": {
+      "vitamins": [
+        "维生素E",
+        "维生素C"
+      ],
+      "minerals": [
+        "锌",
+        "铜"
+      ],
+      "preservatives": [
+        "混合生育酚（天然防腐）"
+      ]
+    },
+    "allergens": [
+      "chicken",
+      "turkey",
+      "egg",
+      "fish"
+    ],
+    "weightRange": {
+      "min": 1,
+      "max": 7,
+      "unit": "kg"
+    },
+    "notes": "高蛋白低碳水，符合猫咪肉食天性"
+  },
+  {
+    "id": "hills-science-diet-cat-adult",
+    "brand": "Hill's Science Diet",
+    "name": "Adult Optimal Care 室内成猫",
+    "species": "cat",
+    "lifeStage": "adult",
+    "packageSize": {
+      "value": 1.5,
+      "unit": "kg"
+    },
+    "pricePerUnit": 280,
+    "crossBorderAvailable": true,
+    "origin": "USA",
+    "ingredients": [
+      "鸡肉粉",
+      "糙米",
+      "玉米",
+      "动物脂肪",
+      "蛋粉",
+      "鱼油"
+    ],
+    "nutrition": {
+      "protein": 32,
+      "fat": 16,
+      "fiber": 5,
+      "moisture": 8,
+      "ash": 6,
+      "calories": 3700
+    },
+    "additives": {
+      "vitamins": [
+        "维生素A",
+        "维生素D3",
+        "维生素E"
+      ],
+      "minerals": [
+        "钙",
+        "磷",
+        "钾"
+      ],
+      "preservatives": [
+        "柠檬酸",
+        "混合生育酚"
+      ]
+    },
+    "allergens": [
+      "chicken",
+      "corn"
+    ],
+    "weightRange": {
+      "min": 2,
+      "max": 6,
+      "unit": "kg"
+    },
+    "notes": "兽医推荐，适合室内成猫"
+  },
+  {
+    "id": "royal-canin-hairball-care",
+    "brand": "Royal Canin",
+    "name": "Hairball Care 化毛球",
+    "species": "cat",
+    "lifeStage": "adult",
+    "packageSize": {
+      "value": 2,
+      "unit": "kg"
+    },
+    "pricePerUnit": 320,
+    "crossBorderAvailable": true,
+    "origin": "France",
+    "ingredients": [
+      "鸡肉粉",
+      "大米",
+      "玉米",
+      "动物脂肪",
+      "植物纤维",
+      "蛋粉"
+    ],
+    "nutrition": {
+      "protein": 32,
+      "fat": 15,
+      "fiber": 7,
+      "moisture": 5.5,
+      "ash": 7,
+      "calories": 3800
+    },
+    "additives": {
+      "vitamins": [
+        "维生素A",
+        "D3",
+        "E"
+      ],
+      "minerals": [
+        "铁",
+        "锌"
+      ]
+    },
+    "allergens": [
+      "chicken",
+      "corn"
+    ],
+    "weightRange": {
+      "min": 3,
+      "max": 6,
+      "unit": "kg"
+    },
+    "notes": "高纤维配方，帮助排出毛球"
+  },
+  {
+    "id": "royal-canin-persian",
+    "brand": "Royal Canin",
+    "name": "Persian 波斯猫专用",
+    "species": "cat",
+    "lifeStage": "adult",
+    "packageSize": {
+      "value": 2,
+      "unit": "kg"
+    },
+    "pricePerUnit": 360,
+    "crossBorderAvailable": true,
+    "origin": "France",
+    "ingredients": [
+      "鸭肉粉",
+      "大米",
+      "动物脂肪",
+      "植物纤维",
+      "蛋粉",
+      "鱼油"
+    ],
+    "nutrition": {
+      "protein": 28,
+      "fat": 18,
+      "fiber": 5.5,
+      "moisture": 5.5,
+      "ash": 6.5,
+      "calories": 3900
+    },
+    "additives": {
+      "vitamins": [
+        "维生素A",
+        "D3",
+        "E"
+      ],
+      "minerals": [
+        "铜",
+        "锌"
+      ]
+    },
+    "allergens": [
+      "duck",
+      "fish"
+    ],
+    "weightRange": {
+      "min": 3,
+      "max": 7,
+      "unit": "kg"
+    },
+    "notes": "专为波斯猫面部结构设计的颗粒形状"
+  },
+  {
+    "id": "acana-cat-kitten",
+    "brand": "Acana",
+    "name": "Heritage Kitten 幼猫",
+    "species": "cat",
+    "lifeStage": "puppy",
+    "packageSize": {
+      "value": 1.8,
+      "unit": "kg"
+    },
+    "pricePerUnit": 460,
+    "crossBorderAvailable": true,
+    "origin": "Canada",
+    "ingredients": [
+      "新鲜鸡肉",
+      "新鲜鱼肉",
+      "新鲜鸡蛋",
+      "鸡肝",
+      "燕麦"
+    ],
+    "nutrition": {
+      "protein": 36,
+      "fat": 20,
+      "fiber": 3,
+      "moisture": 12,
+      "ash": 7.5,
+      "calories": 4050
+    },
+    "additives": {
+      "vitamins": [
+        "维生素E",
+        "C"
+      ],
+      "minerals": [
+        "锌",
+        "铜"
+      ]
+    },
+    "allergens": [
+      "chicken",
+      "fish",
+      "egg"
+    ],
+    "weightRange": {
+      "min": 0.5,
+      "max": 4,
+      "unit": "kg"
+    },
+    "notes": "高蛋白高脂肪，适合 1-12 月幼猫"
+  },
+  {
+    "id": "wellness-core-cat-indoor",
+    "brand": "Wellness Core",
+    "name": "Indoor Formula 室内猫无谷",
+    "species": "cat",
+    "lifeStage": "adult",
+    "packageSize": {
+      "value": 2.3,
+      "unit": "kg"
+    },
+    "pricePerUnit": 380,
+    "crossBorderAvailable": true,
+    "origin": "USA",
+    "ingredients": [
+      "去骨火鸡肉",
+      "火鸡粉",
+      "豌豆",
+      "土豆",
+      "亚麻籽",
+      "蔓越莓"
+    ],
+    "nutrition": {
+      "protein": 38,
+      "fat": 14,
+      "fiber": 5,
+      "moisture": 10,
+      "ash": 7,
+      "calories": 3700
+    },
+    "additives": {
+      "vitamins": [
+        "维生素E",
+        "C"
+      ],
+      "minerals": [
+        "锌",
+        "硒"
+      ],
+      "preservatives": [
+        "混合生育酚"
+      ]
+    },
+    "allergens": [
+      "turkey"
+    ],
+    "weightRange": {
+      "min": 2,
+      "max": 7,
+      "unit": "kg"
+    },
+    "notes": "低脂配方，控制室内猫体重"
+  },
+  {
+    "id": "taste-of-the-wild-cat-venison",
+    "brand": "Taste of the Wild",
+    "name": "Rocky Mountain 鹿肉",
+    "species": "cat",
+    "lifeStage": "all",
+    "packageSize": {
+      "value": 2,
+      "unit": "kg"
+    },
+    "pricePerUnit": 420,
+    "crossBorderAvailable": true,
+    "origin": "USA",
+    "ingredients": [
+      "鹿肉",
+      "鹿肉粉",
+      "豌豆",
+      "扁豆",
+      "番茄渣",
+      "蓝莓"
+    ],
+    "nutrition": {
+      "protein": 42,
+      "fat": 18,
+      "fiber": 3,
+      "moisture": 10,
+      "ash": 8,
+      "calories": 3950
+    },
+    "additives": {
+      "vitamins": [
+        "维生素E"
+      ],
+      "minerals": [
+        "锌",
+        "硒"
+      ]
+    },
+    "allergens": [
+      "venison"
+    ],
+    "weightRange": {
+      "min": 2,
+      "max": 8,
+      "unit": "kg"
+    },
+    "notes": "稀有蛋白源，适合过敏猫咪"
+  },
+  {
+    "id": "ziwi-peak-cat-lamb",
+    "brand": "Ziwi Peak",
+    "name": "Air-Dried Lamb 风干羊肉",
+    "species": "cat",
+    "lifeStage": "all",
+    "packageSize": {
+      "value": 1,
+      "unit": "kg"
+    },
+    "pricePerUnit": 880,
+    "crossBorderAvailable": true,
+    "origin": "New Zealand",
+    "ingredients": [
+      "羊肉",
+      "羊肉心",
+      "羊肉肝",
+      "羊肾",
+      "羊血",
+      "新西兰绿口贝"
+    ],
+    "nutrition": {
+      "protein": 45,
+      "fat": 25,
+      "fiber": 2,
+      "moisture": 14,
+      "ash": 10,
+      "calories": 4800
+    },
+    "additives": {
+      "vitamins": [
+        "维生素E",
+        "D3"
+      ],
+      "minerals": [
+        "锌",
+        "铜"
+      ]
+    },
+    "allergens": [
+      "lamb"
+    ],
+    "weightRange": {
+      "min": 1,
+      "max": 8,
+      "unit": "kg"
+    },
+    "notes": "风干工艺，96% 肉类含量"
+  },
+  {
+    "id": "blue-buffalo-cat-sensitive",
+    "brand": "Blue Buffalo",
+    "name": "Sensitive Stomach 敏感胃",
+    "species": "cat",
+    "lifeStage": "adult",
+    "packageSize": {
+      "value": 1.8,
+      "unit": "kg"
+    },
+    "pricePerUnit": 310,
+    "crossBorderAvailable": true,
+    "origin": "USA",
+    "ingredients": [
+      "去骨三文鱼",
+      "燕麦",
+      "糙米",
+      "豌豆蛋白",
+      "亚麻籽"
+    ],
+    "nutrition": {
+      "protein": 32,
+      "fat": 16,
+      "fiber": 5,
+      "moisture": 9,
+      "ash": 6.5,
+      "calories": 3700
+    },
+    "additives": {
+      "vitamins": [
+        "维生素E",
+        "C"
+      ],
+      "minerals": [
+        "钙",
+        "磷"
+      ]
+    },
+    "allergens": [
+      "fish",
+      "salmon"
+    ],
+    "weightRange": {
+      "min": 2,
+      "max": 6,
+      "unit": "kg"
+    },
+    "notes": "易消化配方，含益生菌"
+  },
+  {
+    "id": "pro-plan-cat-urinary",
+    "brand": "Purina Pro Plan",
+    "name": "UR 泌尿道健康",
+    "species": "cat",
+    "lifeStage": "adult",
+    "packageSize": {
+      "value": 1.5,
+      "unit": "kg"
+    },
+    "pricePerUnit": 290,
+    "crossBorderAvailable": true,
+    "origin": "USA",
+    "ingredients": [
+      "鸡肉粉",
+      "玉米",
+      "小麦",
+      "动物脂肪",
+      "蛋粉"
+    ],
+    "nutrition": {
+      "protein": 35,
+      "fat": 14,
+      "fiber": 3.5,
+      "moisture": 8,
+      "ash": 7,
+      "calories": 3800
+    },
+    "additives": {
+      "vitamins": [
+        "维生素A",
+        "E"
+      ],
+      "minerals": [
+        "镁（控制）"
+      ]
+    },
+    "allergens": [
+      "chicken",
+      "wheat",
+      "corn"
+    ],
+    "weightRange": {
+      "min": 2,
+      "max": 7,
+      "unit": "kg"
+    },
+    "notes": "控制镁含量，预防泌尿道结石"
+  },
+  {
+    "id": "orijen-adult-dog",
+    "brand": "Orijen",
+    "name": "Original 6 Fish 六种鱼",
+    "species": "dog",
+    "lifeStage": "all",
+    "packageSize": {
+      "value": 5.9,
+      "unit": "kg"
+    },
+    "pricePerUnit": 1200,
+    "crossBorderAvailable": true,
+    "origin": "Canada",
+    "ingredients": [
+      "新鲜鱼肉",
+      "新鲜三文鱼",
+      "新鲜鳕鱼",
+      "新鲜比目鱼",
+      "鸡蛋",
+      "南瓜"
+    ],
+    "nutrition": {
+      "protein": 38,
+      "fat": 18,
+      "fiber": 4,
+      "moisture": 12,
+      "ash": 8,
+      "calories": 3900
+    },
+    "additives": {
+      "vitamins": [
+        "维生素E",
+        "C"
+      ],
+      "minerals": [
+        "锌",
+        "铜"
+      ]
+    },
+    "allergens": [
+      "fish",
+      "salmon",
+      "cod",
+      "flounder",
+      "egg"
+    ],
+    "weightRange": {
+      "min": 5,
+      "max": 40,
+      "unit": "kg"
+    },
+    "notes": "六种新鲜鱼肉，高蛋白"
+  },
+  {
+    "id": "acana-classics-red-meat",
+    "brand": "Acana",
+    "name": "Free-Run Poultry 散养禽肉",
+    "species": "dog",
+    "lifeStage": "all",
+    "packageSize": {
+      "value": 6,
+      "unit": "kg"
+    },
+    "pricePerUnit": 980,
+    "crossBorderAvailable": true,
+    "origin": "Canada",
+    "ingredients": [
+      "新鲜鸡肉",
+      "新鲜火鸡肉",
+      "新鲜鸡蛋",
+      "鸡肝",
+      "燕麦",
+      "南瓜"
+    ],
+    "nutrition": {
+      "protein": 33,
+      "fat": 17,
+      "fiber": 6,
+      "moisture": 12,
+      "ash": 7,
+      "calories": 3850
+    },
+    "additives": {
+      "vitamins": [
+        "维生素E"
+      ],
+      "minerals": [
+        "锌",
+        "铜"
+      ]
+    },
+    "allergens": [
+      "chicken",
+      "turkey",
+      "egg"
+    ],
+    "weightRange": {
+      "min": 5,
+      "max": 40,
+      "unit": "kg"
+    },
+    "notes": "WholePrey 仿生猎食配方"
+  },
+  {
+    "id": "royal-canin-poodle-adult",
+    "brand": "Royal Canin",
+    "name": "Poodle Adult 贵宾犬专用",
+    "species": "dog",
+    "lifeStage": "adult",
+    "packageSize": {
+      "value": 3,
+      "unit": "kg"
+    },
+    "pricePerUnit": 380,
+    "crossBorderAvailable": true,
+    "origin": "France",
+    "ingredients": [
+      "鸡肉粉",
+      "玉米",
+      "小麦",
+      "动物脂肪",
+      "蛋粉",
+      "鱼油"
+    ],
+    "nutrition": {
+      "protein": 25,
+      "fat": 14,
+      "fiber": 6,
+      "moisture": 5.5,
+      "ash": 5.5,
+      "calories": 3850
+    },
+    "additives": {
+      "vitamins": [
+        "维生素A",
+        "D3",
+        "E"
+      ],
+      "minerals": [
+        "铜",
+        "锌"
+      ]
+    },
+    "allergens": [
+      "chicken",
+      "corn",
+      "wheat"
+    ],
+    "weightRange": {
+      "min": 2,
+      "max": 25,
+      "unit": "kg"
+    },
+    "notes": "专为贵宾犬被毛和消化设计"
+  },
+  {
+    "id": "royal-canin-shiba-adult",
+    "brand": "Royal Canin",
+    "name": "Shiba Adult 柴犬专用",
+    "species": "dog",
+    "lifeStage": "adult",
+    "packageSize": {
+      "value": 3,
+      "unit": "kg"
+    },
+    "pricePerUnit": 360,
+    "crossBorderAvailable": true,
+    "origin": "France",
+    "ingredients": [
+      "鸡肉粉",
+      "玉米",
+      "小麦",
+      "动物脂肪",
+      "鱼油",
+      "车前子"
+    ],
+    "nutrition": {
+      "protein": 26,
+      "fat": 15,
+      "fiber": 6.5,
+      "moisture": 5.5,
+      "ash": 6,
+      "calories": 3800
+    },
+    "additives": {
+      "vitamins": [
+        "维生素A",
+        "D3",
+        "E"
+      ],
+      "minerals": [
+        "铜",
+        "锌"
+      ]
+    },
+    "allergens": [
+      "chicken",
+      "corn",
+      "wheat",
+      "fish"
+    ],
+    "weightRange": {
+      "min": 8,
+      "max": 14,
+      "unit": "kg"
+    },
+    "notes": "日本柴犬品种专用，含车前子助毛球排出"
+  },
+  {
+    "id": "hills-science-diet-puppy",
+    "brand": "Hill's Science Diet",
+    "name": "Puppy 幼犬健康成长",
+    "species": "dog",
+    "lifeStage": "puppy",
+    "packageSize": {
+      "value": 2.5,
+      "unit": "kg"
+    },
+    "pricePerUnit": 360,
+    "crossBorderAvailable": true,
+    "origin": "USA",
+    "ingredients": [
+      "鸡肉粉",
+      "全谷物小麦",
+      "动物脂肪",
+      "蛋粉",
+      "鱼油"
+    ],
+    "nutrition": {
+      "protein": 28,
+      "fat": 18,
+      "fiber": 4,
+      "moisture": 8,
+      "ash": 7,
+      "calories": 4000
+    },
+    "additives": {
+      "vitamins": [
+        "维生素A",
+        "D3",
+        "E"
+      ],
+      "minerals": [
+        "钙（适合幼犬）",
+        "磷"
+      ]
+    },
+    "allergens": [
+      "chicken",
+      "wheat"
+    ],
+    "weightRange": {
+      "min": 1,
+      "max": 25,
+      "unit": "kg"
+    },
+    "notes": "DHA 支持幼犬大脑发育"
+  },
+  {
+    "id": "wellness-core-grain-free-dog",
+    "brand": "Wellness Core",
+    "name": "Ocean Formula 海洋鱼配方",
+    "species": "dog",
+    "lifeStage": "all",
+    "packageSize": {
+      "value": 5.4,
+      "unit": "kg"
+    },
+    "pricePerUnit": 680,
+    "crossBorderAvailable": true,
+    "origin": "USA",
+    "ingredients": [
+      "去骨三文鱼",
+      "三文鱼粉",
+      "白鱼粉",
+      "豌豆",
+      "亚麻籽",
+      "番茄渣"
+    ],
+    "nutrition": {
+      "protein": 34,
+      "fat": 16,
+      "fiber": 5,
+      "moisture": 10,
+      "ash": 7,
+      "calories": 3700
+    },
+    "additives": {
+      "vitamins": [
+        "维生素E",
+        "C"
+      ],
+      "minerals": [
+        "锌",
+        "硒"
+      ]
+    },
+    "allergens": [
+      "fish",
+      "salmon"
+    ],
+    "weightRange": {
+      "min": 10,
+      "max": 50,
+      "unit": "kg"
+    },
+    "notes": "Omega-3 丰富，支持被毛和关节"
+  },
+  {
+    "id": "taste-of-the-wild-dog-bison",
+    "brand": "Taste of the Wild",
+    "name": "High Prairie Bison 野牛肉",
+    "species": "dog",
+    "lifeStage": "all",
+    "packageSize": {
+      "value": 5.6,
+      "unit": "kg"
+    },
+    "pricePerUnit": 720,
+    "crossBorderAvailable": true,
+    "origin": "USA",
+    "ingredients": [
+      "野牛肉",
+      "鹿肉",
+      "羊肉",
+      "豌豆",
+      "扁豆",
+      "蓝莓",
+      "番茄"
+    ],
+    "nutrition": {
+      "protein": 32,
+      "fat": 18,
+      "fiber": 4,
+      "moisture": 10,
+      "ash": 8.5,
+      "calories": 3750
+    },
+    "additives": {
+      "vitamins": [
+        "维生素E"
+      ],
+      "minerals": [
+        "锌",
+        "铜"
+      ]
+    },
+    "allergens": [
+      "bison",
+      "venison",
+      "lamb"
+    ],
+    "weightRange": {
+      "min": 10,
+      "max": 50,
+      "unit": "kg"
+    },
+    "notes": "三种野味蛋白，适合过敏犬"
+  },
+  {
+    "id": "blue-buffalo-life-protection-dog",
+    "brand": "Blue Buffalo",
+    "name": "Life Protection 鸡肉糙米",
+    "species": "dog",
+    "lifeStage": "adult",
+    "packageSize": {
+      "value": 6,
+      "unit": "kg"
+    },
+    "pricePerUnit": 540,
+    "crossBorderAvailable": true,
+    "origin": "USA",
+    "ingredients": [
+      "去骨鸡肉",
+      "鸡肉粉",
+      "糙米",
+      "燕麦",
+      "亚麻籽",
+      "蓝莓"
+    ],
+    "nutrition": {
+      "protein": 26,
+      "fat": 16,
+      "fiber": 5,
+      "moisture": 10,
+      "ash": 7,
+      "calories": 3700
+    },
+    "additives": {
+      "vitamins": [
+        "维生素E",
+        "C"
+      ],
+      "minerals": [
+        "钙",
+        "磷"
+      ],
+      "preservatives": [
+        "混合生育酚"
+      ]
+    },
+    "allergens": [
+      "chicken"
+    ],
+    "weightRange": {
+      "min": 10,
+      "max": 40,
+      "unit": "kg"
+    },
+    "notes": "经典配方，含 Lifesource Bits 抗氧化颗粒"
+  },
+  {
+    "id": "pedigree-adult-beef",
+    "brand": "Pedigree",
+    "name": "Adult Beef & Vegetable 牛肉蔬菜",
+    "species": "dog",
+    "lifeStage": "adult",
+    "packageSize": {
+      "value": 5,
+      "unit": "kg"
+    },
+    "pricePerUnit": 220,
+    "crossBorderAvailable": false,
+    "origin": "China",
+    "ingredients": [
+      "牛肉粉",
+      "玉米",
+      "小麦",
+      "动物脂肪",
+      "豆粕",
+      "蔬菜粉"
+    ],
+    "nutrition": {
+      "protein": 22,
+      "fat": 12,
+      "fiber": 5,
+      "moisture": 10,
+      "ash": 8,
+      "calories": 3500
+    },
+    "additives": {
+      "vitamins": [
+        "维生素A",
+        "D3",
+        "E"
+      ],
+      "minerals": [
+        "钙",
+        "磷"
+      ],
+      "preservatives": [
+        "BHA/BHT（合成防腐）"
+      ]
+    },
+    "allergens": [
+      "beef",
+      "corn",
+      "wheat"
+    ],
+    "weightRange": {
+      "min": 5,
+      "max": 30,
+      "unit": "kg"
+    },
+    "notes": "入门款，性价比高"
+  },
+  {
+    "id": "nutro-lamb-rice-dog",
+    "brand": "Nutro",
+    "name": "Lamb & Rice 羊肉米饭",
+    "species": "dog",
+    "lifeStage": "adult",
+    "packageSize": {
+      "value": 5,
+      "unit": "kg"
+    },
+    "pricePerUnit": 460,
+    "crossBorderAvailable": true,
+    "origin": "USA",
+    "ingredients": [
+      "羊肉粉",
+      "糙米",
+      "燕麦",
+      "鸡脂",
+      "葵花籽油",
+      "甜菜粕"
+    ],
+    "nutrition": {
+      "protein": 24,
+      "fat": 14,
+      "fiber": 4,
+      "moisture": 10,
+      "ash": 7.5,
+      "calories": 3600
+    },
+    "additives": {
+      "vitamins": [
+        "维生素E",
+        "C"
+      ],
+      "minerals": [
+        "锌",
+        "铜"
+      ]
+    },
+    "allergens": [
+      "lamb",
+      "chicken"
+    ],
+    "weightRange": {
+      "min": 10,
+      "max": 35,
+      "unit": "kg"
+    },
+    "notes": "低敏配方，无玉米/小麦/大豆"
   }
 ]

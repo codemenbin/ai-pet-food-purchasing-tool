@@ -1,11 +1,14 @@
 /**
  * POST /api/recommend
- * body: PetInfo
+ * body: { pet: PetInfo, userProducts?: UserProduct[] }
  * returns: RecommendResponse
+ *
+ * 候选池 = 内置商品库 + 客户端 localStorage 中的用户商品
  */
 
 import { NextResponse } from "next/server";
-import { PetInfoSchema, RecommendResponseSchema } from "@/types";
+import { z } from "zod";
+import { PetInfoSchema, RecommendResponseSchema, UserProductSchema, type Product } from "@/types";
 import { callLLM, isMockMode } from "@/lib/llm";
 import { buildRecommendPrompt } from "@/lib/prompts";
 import { recommendByRules } from "@/lib/recommender";
@@ -15,8 +18,12 @@ import type { RecommendResponse } from "@/types";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-// 反引号常量：用 String.fromCharCode 构造避免在源码里出现反引号触发模板字符串问题
 const BT = String.fromCharCode(96);
+
+const BodySchema = z.object({
+  pet: PetInfoSchema,
+  userProducts: z.array(UserProductSchema).max(100).optional(),
+});
 
 export async function POST(req: Request): Promise<NextResponse> {
   let body: unknown;
@@ -26,7 +33,7 @@ export async function POST(req: Request): Promise<NextResponse> {
     return NextResponse.json({ error: "请求体不是合法 JSON" }, { status: 400 });
   }
 
-  const parsed = PetInfoSchema.safeParse(body);
+  const parsed = BodySchema.safeParse(body);
   if (!parsed.success) {
     return NextResponse.json(
       { error: "参数校验失败", details: parsed.error.flatten() },
@@ -34,17 +41,27 @@ export async function POST(req: Request): Promise<NextResponse> {
     );
   }
 
-  const pet = parsed.data;
+  const pet = parsed.data.pet;
+  const userProducts = parsed.data.userProducts ?? [];
 
-  // 1) 拉取商品池（三层回退：live → cache → mock）
+  // 1) 拉取内置商品池（三层回退：live → cache → mock）
   const fetched = await fetchProducts();
-  // 2) 按物种严格预过滤，避免 prompt 里混入异物种 ID 引起 LLM/mock 误判
-  const candidates = fetched.products.filter((p) => p.species === pet.species);
+  const builtin: Product[] = fetched.products;
+
+  // 2) 合并用户商品（去掉 imageDataUrl 这种 local-only 字段）
+  const userAsProduct: Product[] = userProducts.map((p) => {
+    const { meta: _meta, ...rest } = p;
+    return rest;
+  });
+
+  // 3) 按物种严格预过滤
+  const allCandidates: Product[] = builtin.concat(userAsProduct);
+  const candidates = allCandidates.filter((p) => p.species === pet.species);
 
   if (candidates.length === 0) {
     const resp: RecommendResponse = {
       recommendations: [],
-      summary: "数据源 " + fetched.source + " 中暂无 " + (pet.species === "cat" ? "猫" : "狗") + " 主粮，请稍后再试。",
+      summary: "数据源 " + fetched.source + " 与用户库中均暂无 " + (pet.species === "cat" ? "猫" : "狗") + " 主粮，请添加商品后重试。",
       source: "rule",
     };
     return NextResponse.json(resp);
@@ -54,7 +71,6 @@ export async function POST(req: Request): Promise<NextResponse> {
     const prompt = buildRecommendPrompt(pet, candidates);
     const raw = await callLLM(prompt);
 
-    // 容忍 markdown code fence：用反引号常量拼接正则
     const fenceOpen = new RegExp("^" + BT + BT + BT + "json\\s*", "i");
     const fenceClose = new RegExp(BT + BT + BT + "\\s*$");
     const cleaned = raw.replace(fenceOpen, "").replace(fenceClose, "").trim();
@@ -70,7 +86,7 @@ export async function POST(req: Request): Promise<NextResponse> {
       throw new Error("LLM 输出不符合 schema: " + result.error.message);
     }
 
-    // 二次校验：返回的 productId 必须存在于候选池
+    // 二次校验：返回的 productId 必须存在于合并后的候选池
     const ids = new Set(candidates.map((c) => c.id));
     const safe = {
       ...result.data,

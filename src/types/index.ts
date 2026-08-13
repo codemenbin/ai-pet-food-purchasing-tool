@@ -17,13 +17,30 @@ export type WeightUnit = z.infer<typeof WeightUnitSchema>;
 // 商品 Product
 // ============================================================
 
+/**
+ * 数字预处理：负数/null/NaN/越界 → 0
+ * 配合 schema 容忍 LLM 的 "-1 / null / unknown" 标记
+ */
+function cleanNumber(v: unknown, max: number = 10000): number {
+  if (typeof v !== "number" || !Number.isFinite(v) || v < 0) return 0;
+  return Math.min(v, max);
+}
+function cleanPositive(v: unknown, fallback: number = 1, max: number = 100000): number {
+  if (typeof v !== "number" || !Number.isFinite(v) || v <= 0) return fallback;
+  return Math.min(v, max);
+}
+function cleanClamped(v: unknown, min: number, max: number, fallback: number): number {
+  if (typeof v !== "number" || !Number.isFinite(v)) return fallback;
+  return Math.min(max, Math.max(min, v));
+}
+
 export const NutritionSchema = z.object({
-  protein: z.number().min(0).max(100),
-  fat: z.number().min(0).max(100),
-  fiber: z.number().min(0).max(100),
-  moisture: z.number().min(0).max(100),
-  ash: z.number().min(0).max(100),
-  calories: z.number().min(0).max(10000),
+  protein: z.preprocess((v) => cleanNumber(v, 100), z.number().min(0).max(100)),
+  fat: z.preprocess((v) => cleanNumber(v, 100), z.number().min(0).max(100)),
+  fiber: z.preprocess((v) => cleanNumber(v, 100), z.number().min(0).max(100)),
+  moisture: z.preprocess((v) => cleanNumber(v, 100), z.number().min(0).max(100)),
+  ash: z.preprocess((v) => cleanNumber(v, 100), z.number().min(0).max(100)),
+  calories: z.preprocess((v) => cleanNumber(v, 10000), z.number().min(0).max(10000)),
 });
 export type Nutrition = z.infer<typeof NutritionSchema>;
 
@@ -36,8 +53,8 @@ export const AdditivesSchema = z.object({
 export type Additives = z.infer<typeof AdditivesSchema>;
 
 export const WeightRangeSchema = z.object({
-  min: z.number().min(0),
-  max: z.number().min(0),
+  min: z.preprocess((v) => cleanNumber(v, 1000), z.number().min(0).max(1000)),
+  max: z.preprocess((v) => cleanNumber(v, 1000), z.number().min(0).max(1000)),
   unit: WeightUnitSchema,
 });
 export type WeightRange = z.infer<typeof WeightRangeSchema>;
@@ -49,10 +66,10 @@ export const ProductSchema = z.object({
   species: SpeciesSchema,
   lifeStage: LifeStageSchema,
   packageSize: z.object({
-    value: z.number().positive(),
+    value: z.preprocess((v) => cleanPositive(v, 1, 1000), z.number().positive().max(1000)),
     unit: WeightUnitSchema,
   }),
-  pricePerUnit: z.number().positive(),
+  pricePerUnit: z.preprocess((v) => cleanPositive(v, 0, 100000), z.number().nonnegative().max(100000)),
   crossBorderAvailable: z.boolean(),
   origin: z.string().min(1),
   ingredients: z.array(z.string()).min(1),
@@ -63,6 +80,31 @@ export const ProductSchema = z.object({
   notes: z.string().optional(),
 });
 export type Product = z.infer<typeof ProductSchema>;
+
+// ============================================================
+// 用户添加的商品 UserProduct
+// - 来源：用户手动添加 / 图片 OCR / LLM 推断
+// - aiConfidence: 0-1，仅 source="ai" 时有意义
+// - source: "user" 表示纯手动；"ai" 表示 LLM 解析/推断
+// ============================================================
+
+export const UserProductMetaSchema = z.object({
+  source: z.enum(["user", "ai"]),
+aiConfidence: z.preprocess((v) => cleanClamped(v, 0, 1, 0), z.number().min(0).max(1).optional()),
+  addedAt: z.number().int(),
+  imageDataUrl: z.string().optional(), // 仅 localStorage 中保留；不参与 API 响应
+});
+export type UserProductMeta = z.infer<typeof UserProductMetaSchema>;
+
+export const UserProductSchema = ProductSchema.extend({
+  meta: UserProductMetaSchema,
+});
+export type UserProduct = z.infer<typeof UserProductSchema>;
+
+// 推荐/对比 API 接受的统一商品类型（builtin + user）
+export const AnyProductSchema = z.union([ProductSchema, UserProductSchema]);
+export type AnyProduct = z.infer<typeof AnyProductSchema>;
+
 
 // ============================================================
 // 宠物信息 PetInfo
@@ -100,6 +142,18 @@ export const RecommendResponseSchema = z.object({
   source: z.enum(["llm", "rule", "mock"]),
 });
 export type RecommendResponse = z.infer<typeof RecommendResponseSchema>;
+
+// 候选商品来源标签（前端透明展示数据出处）
+export const CandidateSourceSchema = z.enum(["builtin", "user", "ai"]);
+export type CandidateSource = z.infer<typeof CandidateSourceSchema>;
+
+export const CandidateProductSchema = z.object({
+  product: ProductSchema,
+  source: CandidateSourceSchema,
+aiConfidence: z.preprocess((v) => cleanClamped(v, 0, 1, 0), z.number().min(0).max(1).optional()),
+});
+export type CandidateProduct = z.infer<typeof CandidateProductSchema>;
+
 
 // ============================================================
 // 配料表对比 Comparison
