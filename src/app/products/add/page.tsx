@@ -21,6 +21,7 @@ export default function AddProductPage() {
       open={true}
       onClose={() => router.push("/recommend")}
       onSaved={onSaved}
+      onRemoved={() => { /* 独立页本地状态只读，移除动作仅刷新 modal 内部列表 */ }}
     />
   );
 }

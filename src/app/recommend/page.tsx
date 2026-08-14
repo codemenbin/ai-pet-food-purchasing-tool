@@ -111,7 +111,8 @@ export default function RecommendPage() {
       <AddProductModal
         open={modalOpen}
         onClose={() => setModalOpen(false)}
-        onSaved={() => { setModalOpen(false); setUserProducts(getAllUserProducts()); }}
+        onSaved={(p) => { setModalOpen(false); setUserProducts(getAllUserProducts()); void p; }}
+        onRemoved={() => { setUserProducts(getAllUserProducts()); }}
       />
     </div>
   );

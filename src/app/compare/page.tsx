@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import PetForm, { PetFormValue, defaultPet } from "@/components/PetForm";
 import ProductPicker from "@/components/ProductPicker";
@@ -8,7 +8,7 @@ import ComparisonTable from "@/components/ComparisonTable";
 import AddProductModal from "@/components/AddProductModal";
 import { getAllUserProducts, getCompareSelection } from "@/lib/userProducts";
 import productsData from "@/data/products.json";
-import type { CompareResponse, Product, UserProduct } from "@/types";
+import type { CompareResponse, Product, Species, UserProduct } from "@/types";
 
 const builtinProducts = productsData as Product[];
 
@@ -25,7 +25,6 @@ export default function ComparePage() {
   useEffect(() => {
     const ups = getAllUserProducts();
     setUserProducts(ups);
-    // 初始化预选：URL ?ids=... > localStorage 暂存 > 空
     const fromUrl = searchParams.get("ids");
     if (fromUrl) {
       const ids = fromUrl.split(",").filter(Boolean).slice(0, 3);
@@ -44,6 +43,47 @@ export default function ComparePage() {
     const sel = all.filter((p) => selectedIds.includes(p.id));
     return sel[0]?.species ?? pet?.species ?? "cat";
   }, [selectedIds, pet, userProducts]);
+
+  // Bug 1: reset selection when species changes
+  const prevSpeciesRef = useRef<Species>(pet?.species ?? "cat");
+  useEffect(() => {
+    const cur = pet?.species ?? "cat";
+    if (prevSpeciesRef.current !== cur) {
+      setSelectedIds([]);
+      setResult(null);
+      setError(null);
+      prevSpeciesRef.current = cur;
+    }
+  }, [pet?.species]);
+
+  // Bug 2: 新增/删除同步
+  // - added：物种匹配 + 未满 3，自动勾选
+  // - removed：从 selectedIds 中过滤掉，避免 picker 已消失但 state 残留
+  const prevUserProductIdsRef = useRef<Set<string>>(new Set());
+  useEffect(() => {
+    const curIds = new Set(userProducts.map((p) => p.id));
+    const prevIds = prevUserProductIdsRef.current;
+    const added = userProducts.filter((p) => !prevIds.has(p.id));
+    const removed: string[] = [];
+    prevIds.forEach((id) => { if (!curIds.has(id)) removed.push(id); });
+    if (added.length > 0) {
+      setSelectedIds((cur) => {
+        const slotsLeft = 3 - cur.length;
+        if (slotsLeft <= 0) return cur;
+        const targetSpecies = pet?.species ?? "cat";
+        const toAdd = added.filter((p) => p.species === targetSpecies).slice(0, slotsLeft);
+        if (toAdd.length === 0) return cur;
+        return [...cur, ...toAdd.map((p) => p.id)];
+      });
+    }
+    if (removed.length > 0) {
+      setSelectedIds((cur) => {
+        const next = cur.filter((id) => !removed.includes(id));
+        return next.length === cur.length ? cur : next;
+      });
+    }
+    prevUserProductIdsRef.current = curIds;
+  }, [userProducts, pet?.species]);
 
   async function submit() {
     if (!pet || selectedIds.length < 2) {
@@ -73,12 +113,12 @@ export default function ComparePage() {
     }
   }
 
-  const allProducts: Product[] = builtinProducts.concat(
-    userProducts.map((p) => {
+  const allProducts: Product[] = userProducts
+    .map((p) => {
       const { meta: _meta, ...rest } = p;
       return rest as Product;
     })
-  );
+    .concat(builtinProducts);
 
   return (
     <div className="space-y-6">
@@ -146,7 +186,17 @@ export default function ComparePage() {
       <AddProductModal
         open={modalOpen}
         onClose={() => setModalOpen(false)}
-        onSaved={() => { setModalOpen(false); setUserProducts(getAllUserProducts()); }}
+        onSaved={(p) => {
+          setModalOpen(false);
+          setUserProducts(getAllUserProducts());
+          if (p && selectedIds.length >= 3) {
+            setError("已达 3 个上限，新商品已加入我的库，可手动取消其他商品后再次添加");
+          }
+        }}
+        onRemoved={() => {
+          // 删除走 onRemoved 回调：刷新我的库，移除选中同步 useEffect 处理
+          setUserProducts(getAllUserProducts());
+        }}
       />
     </div>
   );

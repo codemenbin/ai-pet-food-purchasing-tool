@@ -57,6 +57,28 @@ describe("userProducts - CRUD", () => {
     expect(getAllUserProducts()).toHaveLength(1);
     expect(getAllUserProducts()[0]!.id).toBe("u1");
   });
+  it("add new → 新商品放最前", () => {
+    addUserProduct(makeFakeProduct("a", "Brand A", "Product A"));
+    addUserProduct(makeFakeProduct("b", "Brand B", "Product B"));
+    addUserProduct(makeFakeProduct("c", "Brand C", "Product C"));
+    const list = getAllUserProducts();
+    expect(list[0]!.id).toBe("a");
+    expect(list[1]!.id).toBe("b");
+    expect(list[2]!.id).toBe("c");
+  });
+
+  it("add same ID → 覆盖并移至最前（不重复）", () => {
+    addUserProduct(makeFakeProduct("a", "Brand A", "Product A"));
+    addUserProduct(makeFakeProduct("b", "Brand B", "Product B"));
+    // 重新添加 a → 应覆盖并移到最前
+    addUserProduct(makeFakeProduct("a", "Brand A Updated", "Product A v2"));
+    const list = getAllUserProducts();
+    expect(list.length).toBe(2);
+    expect(list[0]!.id).toBe("a");
+    expect(list[0]!.name).toBe("Product A v2"); // 确认是覆盖后的数据
+    expect(list[1]!.id).toBe("b");
+  });
+
   it("same ID overwrites (no duplicates)", () => {
     addUserProduct(makeFakeProduct("u1", "Acme", "v1"));
     addUserProduct(makeFakeProduct("u1", "Acme", "v2"));

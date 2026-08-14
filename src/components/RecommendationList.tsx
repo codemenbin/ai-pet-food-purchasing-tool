@@ -1,10 +1,13 @@
-"use client";
+﻿"use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import type { Product, Recommendation, RecommendResponse } from "@/types";
-import ProductCard from "./ProductCard";
-import { addToCompareSelection } from "@/lib/userProducts";
+import type { Product, RecommendResponse } from "@/types";
+import {
+  addToCompareSelection,
+  getCompareSelection,
+  removeFromCompareSelection,
+} from "@/lib/userProducts";
 
 export default function RecommendationList({
   data,
@@ -14,13 +17,40 @@ export default function RecommendationList({
   products: Product[];
 }) {
   const router = useRouter();
-  const [feedback, setFeedback] = useState<Record<string, string>>({});
+  // 已加入对比的商品 ID 集合（持久化在 localStorage）
+  const [compareIds, setCompareIds] = useState<Set<string>>(new Set());
+  // 短反馈提示：刚刚点击的 productId
+  const [justAdded, setJustAdded] = useState<string | null>(null);
+
+  // 挂载时同步一次；其他页面可能改了 localStorage
+  useEffect(() => {
+    setCompareIds(new Set(getCompareSelection()));
+  }, []);
+
+  // 清理定时器
+  useEffect(() => {
+    if (!justAdded) return;
+    const t = setTimeout(() => setJustAdded(null), 1500);
+    return () => clearTimeout(t);
+  }, [justAdded]);
+
   const productMap = new Map(products.map((p) => [p.id, p]));
 
-  function handleAddToCompare(productId: string) {
-    addToCompareSelection(productId);
-    setFeedback((s) => ({ ...s, [productId]: "✓ 已加入" }));
-    setTimeout(() => setFeedback((s) => { const c = { ...s }; delete c[productId]; return c; }), 1500);
+  function handleToggleCompare(productId: string) {
+    if (compareIds.has(productId)) {
+      // 已加入 → 移除
+      removeFromCompareSelection(productId);
+      const next = new Set(compareIds);
+      next.delete(productId);
+      setCompareIds(next);
+    } else {
+      // 未加入 → 添加
+      addToCompareSelection(productId);
+      const next = new Set(compareIds);
+      next.add(productId);
+      setCompareIds(next);
+      setJustAdded(productId);
+    }
   }
 
   function handleGoCompare() {
@@ -53,6 +83,8 @@ export default function RecommendationList({
         {data.recommendations.map((rec) => {
           const product = productMap.get(rec.productId);
           if (!product) return null;
+          const isInCompare = compareIds.has(rec.productId);
+          const isJustAdded = justAdded === rec.productId;
           return (
             <li
               key={rec.productId}
@@ -76,11 +108,19 @@ export default function RecommendationList({
                   <div className="flex items-center gap-2 mt-2">
                     <button
                       type="button"
-                      onClick={() => handleAddToCompare(rec.productId)}
-                      className="text-xs px-2 py-1 rounded border border-brand-300 text-brand-700 hover:bg-brand-50"
+                      onClick={() => handleToggleCompare(rec.productId)}
+                      className={
+                        isInCompare
+                          ? "text-xs px-2 py-1 rounded border border-emerald-300 bg-emerald-50 text-emerald-700 hover:bg-emerald-100"
+                          : "text-xs px-2 py-1 rounded border border-brand-300 text-brand-700 hover:bg-brand-50"
+                      }
                       data-testid={`add-to-compare-${rec.productId}`}
                     >
-                      {feedback[rec.productId] ?? "+ 加入对比"}
+                      {isInCompare
+                        ? isJustAdded
+                          ? "✓ 已加入"
+                          : "✓ 已加入"
+                        : "+ 加入对比"}
                     </button>
                   </div>
                 </div>

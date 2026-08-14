@@ -46,6 +46,7 @@ function detectLifeStage(text: string): "puppy" | "adult" | "senior" | "all" {
   return "all";
 }
 
+
 function ruleBasedProduct(input: ParseInput): Product {
   const species = input.species ?? detectSpecies(input.brand + " " + input.name);
   const lifeStage = input.lifeStage ?? detectLifeStage(input.brand + " " + input.name);
@@ -339,6 +340,7 @@ export async function parseProduct(input: ParseInput): Promise<ParseOutput> {
       const o = obj as Record<string, unknown>;
       if ("product" in o) {
         o.product = sanitizeProduct(o.product);
+
       }
       // 顶层 confidence：min(0).max(1)，负数/NaN/越界 → 0.3（默认值）
       if (typeof o.confidence !== "number" || !Number.isFinite(o.confidence) || o.confidence < 0 || o.confidence > 1) {

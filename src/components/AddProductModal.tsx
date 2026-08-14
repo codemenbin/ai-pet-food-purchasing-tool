@@ -9,10 +9,55 @@ import {
 } from "@/lib/userProducts";
 import type { LifeStage, Species, UserProduct } from "@/types";
 
+/**
+ * 把图片 File 压缩到最长边 1024px、JPEG 质量 0.85，返回 data URL。
+ * - 5MB PNG → ~200KB JPEG（缩小 25x）
+ * - LLM 端点处理时间从 30s+ → 3-5s
+ * - 已经是 data URL 的不重复处理
+ */
+async function compressImage(file: File, maxDim = 1024, quality = 0.85): Promise<string> {
+  if (!file.type.startsWith("image/")) throw new Error("仅支持图片文件");
+  const dataUrl = await new Promise<string>((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(typeof reader.result === "string" ? reader.result : "");
+    reader.onerror = () => reject(new Error("读取图片失败"));
+    reader.readAsDataURL(file);
+  });
+  // 仅对较大的图片做压缩
+  if (file.size < 300_000) return dataUrl;
+  return new Promise<string>((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => {
+      let { width, height } = img;
+      if (Math.max(width, height) <= maxDim) {
+        resolve(dataUrl);
+        return;
+      }
+      if (width > height) {
+        height = Math.round((height * maxDim) / width);
+        width = maxDim;
+      } else {
+        width = Math.round((width * maxDim) / height);
+        height = maxDim;
+      }
+      const canvas = document.createElement("canvas");
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) { resolve(dataUrl); return; }
+      ctx.drawImage(img, 0, 0, width, height);
+      resolve(canvas.toDataURL("image/jpeg", quality));
+    };
+    img.onerror = () => reject(new Error("图片解码失败"));
+    img.src = dataUrl;
+  });
+}
+
 export type AddProductModalProps = {
   open: boolean;
   onClose: () => void;
   onSaved?: (product: UserProduct) => void;
+  onRemoved?: (id: string) => void;
 };
 
 type ParseResult = {
@@ -87,7 +132,8 @@ function fromParse(p: ParseResult["product"]): Omit<Draft, "imageDataUrl"> {
   };
 }
 
-export default function AddProductModal({ open, onClose, onSaved }: AddProductModalProps) {
+
+export default function AddProductModal({ open, onClose, onSaved, onRemoved }: AddProductModalProps) {
   const [draft, setDraft] = useState<Draft>(blankDraft);
   const [parsing, setParsing] = useState(false);
   const [parseInfo, setParseInfo] = useState<{ confidence: number; source: string; warnings: string[] } | null>(null);
@@ -95,6 +141,8 @@ export default function AddProductModal({ open, onClose, onSaved }: AddProductMo
   const [savedId, setSavedId] = useState<string | null>(null);
   const [savedProducts, setSavedProducts] = useState<UserProduct[]>([]);
   const fileRef = useRef<HTMLInputElement>(null);
+  // 取消上一次未完成的 AI 解析请求，避免重复点击时并发
+  const abortRef = useRef<AbortController | null>(null);
 
   // 打开时重置 + 拉一次我的库
   useEffect(() => {
@@ -129,7 +177,8 @@ export default function AddProductModal({ open, onClose, onSaved }: AddProductMo
     reader.readAsDataURL(file);
   }
 
-  async function aiParse() {
+  
+async function aiParse() {
     if (!draft.brand.trim() || !draft.name.trim()) {
       setError("请先填写品牌和名称");
       return;
@@ -204,9 +253,11 @@ export default function AddProductModal({ open, onClose, onSaved }: AddProductMo
     onSaved?.(product);
   }
 
-  function removeOne(id: string) {
+  
+function removeOne(id: string) {
     removeUserProduct(id);
     setSavedProducts(getAllUserProducts());
+    onRemoved?.(id);
   }
 
   if (!open) return null;
@@ -326,6 +377,7 @@ export default function AddProductModal({ open, onClose, onSaved }: AddProductMo
                   <input className="input" value={draft.origin} onChange={(e) => patch("origin", e.target.value)} placeholder="Canada / 加拿大" />
                 </Field>
               </div>
+
 
               <div className="grid grid-cols-3 md:grid-cols-6 gap-2">
                 <Field label="蛋白%"><input className="input" type="number" min={0} max={100} step={0.1} value={draft.protein} onChange={(e) => patch("protein", Number(e.target.value))} /></Field>
