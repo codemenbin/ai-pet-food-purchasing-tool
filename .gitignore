@@ -47,4 +47,4 @@ next-env.d.ts
 Thumbs.db
 
 # doc
-docs/personal-work
+docs/*
