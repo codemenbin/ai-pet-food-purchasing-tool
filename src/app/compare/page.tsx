@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import PetForm, { PetFormValue, defaultPet } from "@/components/PetForm";
 import ProductPicker from "@/components/ProductPicker";
@@ -12,7 +12,7 @@ import type { CompareResponse, Product, Species, UserProduct } from "@/types";
 
 const builtinProducts = productsData as Product[];
 
-export default function ComparePage() {
+function ComparePageInner() {
   const searchParams = useSearchParams();
   const [pet, setPet] = useState<PetFormValue>(defaultPet);
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
@@ -199,5 +199,19 @@ export default function ComparePage() {
         }}
       />
     </div>
+  );
+}
+
+
+/**
+ * Next.js 14 prerender 要求使用 useSearchParams() 的客户端组件必须包在 <Suspense> 内
+ * （否则 build 时报 "Error occurred prerendering page /compare"）
+ * 这里把整页组件包一层 Suspense 默认 export
+ */
+export default function ComparePage() {
+  return (
+    <Suspense fallback={<div className="text-sm text-slate-400 p-6">加载中…</div>}>
+      <ComparePageInner />
+    </Suspense>
   );
 }
