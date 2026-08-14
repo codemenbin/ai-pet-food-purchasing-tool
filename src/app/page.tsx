@@ -44,21 +44,6 @@ export default function Home() {
           </p>
         </Link>
       </section>
-
-      <section className="rounded-2xl bg-slate-50 border border-slate-200 p-6 text-sm text-slate-600 space-y-2">
-        <p>
-          <strong>Part 1 案例文档</strong>（AI 制表平台 · 五层架构）：
-          <code className="ml-2 text-xs bg-white px-1.5 py-0.5 rounded border border-slate-200">
-            docs/case-study.md
-          </code>
-        </p>
-        <p>
-          <strong>Part 3 AI 协作记录</strong>：
-          <code className="ml-2 text-xs bg-white px-1.5 py-0.5 rounded border border-slate-200">
-            docs/ai-collaboration.md
-          </code>
-        </p>
-      </section>
     </div>
   );
 }
