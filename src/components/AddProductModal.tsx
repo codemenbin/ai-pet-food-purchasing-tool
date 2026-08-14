@@ -325,7 +325,7 @@ function removeOne(id: string) {
                 className="btn-ghost text-sm"
                 data-testid="modal-image-trigger"
               >
-                📷 选择图片（可选）
+                📷 上传成分表图片（可选）
               </button>
               {draft.imageDataUrl && (
                 <img src={draft.imageDataUrl} alt="preview" className="h-10 w-10 object-cover rounded border border-slate-200" />
