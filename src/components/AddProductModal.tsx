@@ -158,23 +158,20 @@ export default function AddProductModal({ open, onClose, onSaved, onRemoved }: A
     setDraft((d) => ({ ...d, [k]: v }));
   }
 
-  function handleFile(file: File | null) {
+  async function handleFile(file: File | null) {
     if (!file) return;
     if (!file.type.startsWith("image/")) {
       setError("只支持图片文件");
       return;
     }
-    if (file.size > 5_000_000) {
-      setError("图片不能超过 5MB");
-      return;
-    }
-    const reader = new FileReader();
-    reader.onload = () => {
-      const dataUrl = typeof reader.result === "string" ? reader.result : undefined;
+    try {
+      // 压缩到 1024px / JPEG 0.85（5MB → ~200KB，省 25x token）
+      const dataUrl = await compressImage(file);
       patch("imageDataUrl", dataUrl);
       setError(null);
-    };
-    reader.readAsDataURL(file);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : String(e));
+    }
   }
 
   
